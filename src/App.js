@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
 import './App.css';
-import Scene from './SceneWriter/Scene';
+import SceneCard from './SceneWriter/SceneCard';
 import { Button } from '@material-ui/core';
-import { append, pipe, thunkify } from 'ramda';
+import { append, pipe } from 'ramda';
 
 function App() {
-  let [ SCENES, setScenes ] = useState([]);
+  const [ SCENES, setScenes ] = useState([]);
 
-  const addNewObject = (scene) => pipe(
+  const addNewObject = (scene) => () => pipe(
     append(scene),
     setScenes
-  )
+  )(SCENES);
 
   return (
     <div className="App">
       <header className="App-header">
-        <Button onClick={thunkify(addNewObject('scene')(SCENES))}>Add Scene</Button>
+        <Button className="App-button" onClick={addNewObject('scene')}>Add Scene</Button>
         {
-          SCENES.map((scene, index) => (
-            <Scene name="default" key={index} />
-          ))
+          SCENES.map((scene, index) => <SceneCard name="" key={index} />)
         }
       </header>
     </div>

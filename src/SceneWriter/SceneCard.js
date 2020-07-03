@@ -2,6 +2,9 @@ import { Card, CardContent, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { pipe, path, tap } from 'ramda';
 import EditIcon from '@material-ui/icons/Edit';
+import SaveDialog from '../common/SaveDialog';
+import SceneSetup from './SceneSetup';
+import './SceneCard.css';
 
 /**
  * @typedef SceneProps
@@ -13,22 +16,24 @@ import EditIcon from '@material-ui/icons/Edit';
  * @name SceneFn
  * @param {SceneProps} props
  */
-function SceneFn(props) {
+export default function SceneFn(props) {
 	const [ name, setName ] = useState('');
+
+	const [ open, setOpen ] = useState(false);
+
 	const editName = pipe(
 		path([ 'target', 'value' ]),
 		tap(console.log),
 		setName
 	);
 
-	const cardOnClick = tap(console.log);
-
-	return <Card raised={true}>
+	return <Card className="Card" raised={true}>
 		<CardContent>
 			<TextField label="Scene Name" onChange={editName} defaultValue={props.name} />
-			<EditIcon onClick={cardOnClick} />
+			<EditIcon onClick={() => setOpen(true)} />
+			<SaveDialog open={open}>
+				<SceneSetup />
+			</SaveDialog>
 		</CardContent>
 	</Card>
 }
-
-export default SceneFn;
