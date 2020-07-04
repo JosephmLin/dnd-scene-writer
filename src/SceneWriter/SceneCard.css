@@ -1,3 +1,18 @@
 .Card {
 	margin: auto;
 }
+
+.CardContent {
+	display: flex;
+	align-items: center;
+}
+
+.SceneName {
+	order: 1;
+	flex: 3
+}
+
+.CardActions {
+	order: 2;
+	flex: 1;
+}

@@ -4,8 +4,8 @@ import { pipe, path, tap } from 'ramda';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveDialog from '../common/SaveDialog';
 import SceneSetup from './SceneSetup';
+import ClearIcon from '@material-ui/icons/Clear';
 import './SceneCard.css';
-
 /**
  * @typedef SceneProps
  * @param {string} name 
@@ -23,16 +23,25 @@ export default function SceneFn(props) {
 
 	const editName = pipe(
 		path([ 'target', 'value' ]),
-		tap(console.log),
 		setName
 	);
 
+	const closeDialog = () => setOpen(false);
+	const openDialog = () => setOpen(true);
+	const removeObject = () => props.removeObject();
+	const saveAndClose = () => pipe(
+
+	)
+
 	return <Card className="Card" raised={true}>
-		<CardContent>
-			<TextField label="Scene Name" onChange={editName} defaultValue={props.name} />
-			<EditIcon onClick={() => setOpen(true)} />
+		<CardContent className="CardContent">
+			<TextField className="SceneName" label="Scene Name" onChange={editName} defaultValue={props.name} />
+			<span className="CardActions">
+				<EditIcon className="SceneEdit" onClick={openDialog} />
+				<ClearIcon className="SceneDelete" onClick={removeObject} />
+			</span>
 			<SaveDialog open={open}>
-				<SceneSetup />
+				<SceneSetup saveAndClose={} close={closeDialog} />
 			</SaveDialog>
 		</CardContent>
 	</Card>
