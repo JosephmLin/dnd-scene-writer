@@ -13,16 +13,12 @@ function SceneHomePage(props) {
 		props.addScene(`${objType} - ${uuidv4()}`)
 	}
 
-	const removeObject = key => () => {
-		console.log(props.scenes);
-		console.log('REMOVE SCENE');
-		console.log(key);
-		props.removeScene(key);
-	}
+	const removeObject = key => () => props.removeScene(key);
 
-	return <div>
-		<Button className="App-button" onClick={addNewScene('scene')}>Add Scene</Button>
-		{SCENES.map((scene) => (<SceneCard name="" key={scene} removeObject={removeObject(scene)} />))}
+
+	return <div className="App-Parent">
+		<Button className="App-Button" onClick={addNewScene('scene')}>Add Scene</Button>
+		{SCENES.map((scene) => (<SceneCard className="SceneCard" key={scene} removeObject={removeObject(scene)} />))}
 	</div>
 }
 
