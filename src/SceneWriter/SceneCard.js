@@ -1,10 +1,11 @@
 import { Card, CardContent, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
-import { pipe, path, tap } from 'ramda';
+import { pipe, path } from 'ramda';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveDialog from '../common/SaveDialog';
 import SceneSetup from './SceneSetup';
 import ClearIcon from '@material-ui/icons/Clear';
+
 import './SceneCard.css';
 /**
  * @typedef SceneProps
@@ -41,7 +42,7 @@ export default function SceneFn(props) {
 				<ClearIcon className="SceneDelete" onClick={removeObject} />
 			</span>
 			<SaveDialog open={open}>
-				<SceneSetup saveAndClose={} close={closeDialog} />
+				<SceneSetup saveAndClose={saveAndClose} close={closeDialog} />
 			</SaveDialog>
 		</CardContent>
 	</Card>
