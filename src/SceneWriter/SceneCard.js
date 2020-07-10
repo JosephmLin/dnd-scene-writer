@@ -5,6 +5,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import SaveDialog from '../common/SaveDialog';
 import SceneSetup from './SceneSetup';
 import ClearIcon from '@material-ui/icons/Clear';
+import { useDrag } from 'react-dnd';
+import { ItemTypes } from './constants';
 
 import './SceneCard.css';
 /**
@@ -14,13 +16,20 @@ import './SceneCard.css';
 
 /**
  * @function
- * @name SceneFn
+ * @name SceneCard
  * @param {SceneProps} props
  */
-export default function SceneFn(props) {
+export default function SceneCard(props) {
 	const [ name, setName ] = useState('');
 
 	const [ open, setOpen ] = useState(false);
+
+	const [ { isDragging }, drag ] = useDrag({
+		item: { type: ItemTypes.SCENE },
+		collect: monitor => ({
+			isDragging: !!monitor.isDragging()
+		})
+	})
 
 	const editName = pipe(
 		path([ 'target', 'value' ]),
@@ -30,11 +39,11 @@ export default function SceneFn(props) {
 	const closeDialog = () => setOpen(false);
 	const openDialog = () => setOpen(true);
 	const removeObject = () => props.removeObject();
-	const saveAndClose = () => pipe(
+	const saveAndClose = () => {
+		closeDialog();
+	}
 
-	)
-
-	return <Card className="Card" raised={true}>
+	return <Card className="Card" style={{ opacity: isDragging ? 0.5 : 1 }} raised={true}>
 		<CardContent className="CardContent">
 			<TextField className="SceneName" label="Scene Name" onChange={editName} defaultValue={props.name} />
 			<span className="CardActions">
@@ -42,7 +51,8 @@ export default function SceneFn(props) {
 				<ClearIcon className="SceneDelete" onClick={removeObject} />
 			</span>
 			<SaveDialog open={open}>
-				<SceneSetup saveAndClose={saveAndClose} close={closeDialog} />
+				{/* I need to rethink how we're saving and closing here */}
+				<SceneSetup save={saveAndClose} close={closeDialog} />
 			</SaveDialog>
 		</CardContent>
 	</Card>

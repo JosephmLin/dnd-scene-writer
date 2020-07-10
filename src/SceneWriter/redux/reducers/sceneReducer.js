@@ -1,5 +1,5 @@
 import { tags } from '../action/sceneActions';
-import { __, always, apply, remove, indexOf, juxt, tap, inc, assoc, append, cond, pipe, path, prop, propEq, T, identity } from 'ramda';
+import { __, always, apply, remove, indexOf, juxt, inc, assoc, append, cond, pipe, pathOr, prop, propEq, T, identity } from 'ramda';
 
 const initialState = {
 	state: undefined,
@@ -47,9 +47,17 @@ const reducer = (state = initialState, action) => {
 		[ typeEquals(tags.REMOVE_SCENE_TAG), pipe(
 			removeScene(state)
 		) ],
-		// [ tagEquals(AddScene.FAILURE_ADD_SCENE_TAG), identity ],
 		[ T, always(state) ]
 	])(action);
 }
+
+/**
+ * @function
+ * @name getScenes
+ * @description This retrieves store data as established by this reducer
+ * @param {ReduxStore} store
+ * @returns {Array.<>}
+ */
+export const getScenes = pathOr([], [ 'sceneReducer', 'scenes' ])
 
 export default reducer;
