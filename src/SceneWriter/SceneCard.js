@@ -5,8 +5,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import SaveDialog from '../common/SaveDialog';
 import SceneSetup from './SceneSetup';
 import ClearIcon from '@material-ui/icons/Clear';
-import { useDrag } from 'react-dnd';
-import { ItemTypes } from './constants';
 
 import './SceneCard.css';
 /**
@@ -24,13 +22,6 @@ export default function SceneCard(props) {
 
 	const [ open, setOpen ] = useState(false);
 
-	const [ { isDragging }, drag ] = useDrag({
-		item: { type: ItemTypes.SCENE },
-		collect: monitor => ({
-			isDragging: !!monitor.isDragging()
-		})
-	})
-
 	const editName = pipe(
 		path([ 'target', 'value' ]),
 		setName
@@ -43,10 +34,10 @@ export default function SceneCard(props) {
 		closeDialog();
 	}
 
-	return <Card className="Card" style={{ opacity: isDragging ? 0.5 : 1 }} raised={true}>
-		<CardContent className="CardContent">
+	return <Card className="SceneCard" raised={true}>
+		<CardContent className="SceneCardContent">
 			<TextField className="SceneName" label="Scene Name" onChange={editName} defaultValue={props.name} />
-			<span className="CardActions">
+			<span className="SceneCardActions">
 				<EditIcon className="SceneEdit" onClick={openDialog} />
 				<ClearIcon className="SceneDelete" onClick={removeObject} />
 			</span>

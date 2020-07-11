@@ -1,0 +1,33 @@
+import React from 'react';
+import { props } from 'ramda';
+
+const ReorderableParent = ({ children }) => {
+
+	const drop = e => {
+		e.preventDefault();
+
+		const card_id = e.datatransfer.getData('card_id');
+
+		const card = document.getElementById(card_id);
+		card.style.display = 'block';
+
+		e.target.appendChild(card);
+	};
+
+	const dragOver = e => {
+		e.preventDefault();
+
+
+	}
+
+	return <div
+		id={props.id}
+		className={props.className}
+		onDrop={drop}
+		onDragOver={dragOver}
+	>
+		{children}
+	</div>
+}
+
+export default ReorderableParent;

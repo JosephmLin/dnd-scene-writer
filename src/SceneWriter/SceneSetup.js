@@ -13,7 +13,7 @@ export default function PaymentForm() {
       </Typography>
 			<Grid container spacing={3}>
 				<Grid item xs={12} md={6}>
-					<TextField required id="cardName" label="Name on card" fullWidth autoComplete="cc-name" />
+					<TextField required id="cardName" label="One Line Description of the Scene" fullWidth autoComplete="cc-name" />
 				</Grid>
 				<Grid item xs={12} md={6}>
 					<TextField
