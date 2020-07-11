@@ -18,8 +18,8 @@ function SceneHomePage({ [ storePropKey ]: SCENES, addScene, removeScene }) {
 	const removeObject = key => () => removeScene(key);
 
 
-	return <div className="App-">
-		<Button className="App-Button" onClick={addNewScene('scene')}>Add Scene</Button>
+	return <div className="SceneHomePage">
+		<Button className="SceneHomePage-Button" onClick={addNewScene('scene')}>Add Scene</Button>
 		{SCENES.map((scene) => (<SceneCard className="SceneCard" key={scene} removeObject={removeObject(scene)} />))}
 	</div>
 }

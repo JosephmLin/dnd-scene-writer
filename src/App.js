@@ -24,11 +24,11 @@ function App() {
         <SceneHomePage />
         <SortableParent
           id="sortableParent-1"
-          className="sortableParent"
+          className="SortableParent"
         >
           <SortableObject
             id="sortableObject-1"
-            className="sortableObject"
+            className="SortableObject"
             draggable="true"
           >
             Hello World #1;
@@ -36,11 +36,11 @@ function App() {
         </SortableParent>
         <SortableParent
           id="sortableParent-2"
-          className="sortableParent"
+          className="SortableParent"
         >
           <SortableObject
             id="sortableObject-2"
-            className="sortableObject"
+            className="SortableObject"
             draggable="true"
           >
             Hello World #2

@@ -1,12 +1,12 @@
 import React from 'react';
 import { props } from 'ramda';
 
-const ReorderableParent = ({ children }) => {
+const ReorderableParent = (props) => {
 
 	const drop = e => {
 		e.preventDefault();
 
-		const card_id = e.datatransfer.getData('card_id');
+		const card_id = e.dataTransfer.getData('card_id');
 
 		const card = document.getElementById(card_id);
 		card.style.display = 'block';
@@ -26,7 +26,7 @@ const ReorderableParent = ({ children }) => {
 		onDrop={drop}
 		onDragOver={dragOver}
 	>
-		{children}
+		{props.children}
 	</div>
 }
 
