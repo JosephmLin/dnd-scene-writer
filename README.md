@@ -1,8 +1,19 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### DND Story Writer
 
-In the project directory, you can run:
+This is a simple application for displaying story board elements for DND.
+
+Each set of scenes makes one adventure.
+
+#### List of Features
+
+Create a Scene in DND.
+Each scene is a drag-and-drop board element.
+
+### Pages
+
+
 
 ### `npm start`
 

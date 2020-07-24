@@ -41,7 +41,7 @@
 .MainPage {
   order: 2;
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   flex: 10;
@@ -50,22 +50,4 @@
   overflow: hidden;
   margin: 0 auto;
   padding: 15px;
-}
-
-.MainPage .SortableParent {
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  max-width: 300px;
-
-  background-color: #313131;
-  height: 100%;
-  padding: 10px;
-  margin: 15px;
-}
-
-.MainPage .SortableParent .SortableObject {
-  padding: 15px 25px;
-  background-color: #f3f3f3
 }

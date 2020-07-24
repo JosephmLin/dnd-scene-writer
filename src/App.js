@@ -2,10 +2,10 @@ import React from 'react';
 import './App.css';
 
 import SceneHomePage from './SceneWriter/SceneHomePage';
-import SortableParent from './SceneWriter/drag-and-drop/SortableParent';
-import SortableObject from './SceneWriter/drag-and-drop/SortableObject';
+import SortablePage from './SceneWriter/drag-and-drop/SortablePage';
 
 function App() {
+  // needs react-router at a later time for each of these headers
   return (
     <div className="App">
       <header className="App-header">
@@ -22,30 +22,7 @@ function App() {
       {/* left navigation bar will hold denote the various sessions in the campaign. Each session depicts a set of scenes, NPCs and characters */}
       <div className="MainPage">
         <SceneHomePage />
-        <SortableParent
-          id="sortableParent-1"
-          className="SortableParent"
-        >
-          <SortableObject
-            id="sortableObject-1"
-            className="SortableObject"
-            draggable="true"
-          >
-            Hello World #1;
-          </SortableObject>
-        </SortableParent>
-        <SortableParent
-          id="sortableParent-2"
-          className="SortableParent"
-        >
-          <SortableObject
-            id="sortableObject-2"
-            className="SortableObject"
-            draggable="true"
-          >
-            Hello World #2
-          </SortableObject>
-        </SortableParent>
+        {/* <SortablePage /> */}
       </div>
 
     </div>

@@ -1,4 +1,4 @@
-import { toPairs, adjust, replace, pipe, fromPairs, map, tap } from 'react';
+// import { toPairs, adjust, replace, pipe, fromPairs, map, tap } from 'react';
 
 const ADD_SCENE_TAG = 'ADD_SCENE'
 const REMOVE_SCENE_TAG = 'REMOVE_SCENE'
@@ -18,14 +18,6 @@ const actionMaker = tag => payload => ({
 	type: tag
 })
 
-// const actions2 = pipe(
-// 	map(actionMaker),
-// 	toPairs,
-// 	map(
-// 		adjust(0, replace('_TAG', '_ACTION'))
-// 	),
-// 	fromPairs
-// );
 
 export const actions = {
 	ADD_SCENE_ACTION: actionMaker(ADD_SCENE_TAG),
