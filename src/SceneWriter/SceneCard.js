@@ -46,7 +46,6 @@ export default function SceneCard(props) {
 					<AddIcon className="AddScene" onClick={props.addNewScene} />
 				</span>
 				<SaveDialog open={open}>
-					{/* I need to rethink how we're saving and closing here */}
 					<SceneSetup save={saveAndClose} close={closeDialog} />
 				</SaveDialog>
 			</CardContent>

@@ -1,15 +1,15 @@
 import reducer from '../scenesReducer';
 
 import { tags } from '../../action/scenesActions';
-describe('addSceneReducer', () => {
+describe('updateSceneReducer', () => {
 	const testState = {
 		scenes: {
 			test: 'b',
 			'id-here-1': 'a'
 		}
 	};
-	const addSceneData = {
-		type: tags.ADD_SCENE_TAG,
+	const updateSceneData = {
+		type: tags.UPDATE_SCENE_TAG,
 		payload: {
 			data: '123',
 			id: 'id-here - 0'
@@ -21,21 +21,21 @@ describe('addSceneReducer', () => {
 			id: 'test'
 		}
 	}
-	test('should add scene', () => {
-		expect(reducer(undefined, addSceneData)).toEqual({
+	test('should update scene', () => {
+		expect(reducer(undefined, updateSceneData)).toEqual({
 			scenes: {
-				'id-here - 0': addSceneData.payload
+				'id-here - 0': updateSceneData.payload
 			},
-			state: tags.ADD_SCENE_TAG
+			state: tags.UPDATE_SCENE_TAG
 		});
 
-		expect(reducer(testState, addSceneData)).toEqual({
+		expect(reducer(testState, updateSceneData)).toEqual({
 			scenes: {
-				'id-here - 0': addSceneData.payload,
+				'id-here - 0': updateSceneData.payload,
 				test: 'b',
 				'id-here-1': 'a'
 			},
-			state: tags.ADD_SCENE_TAG
+			state: tags.UPDATE_SCENE_TAG
 		});
 	});
 

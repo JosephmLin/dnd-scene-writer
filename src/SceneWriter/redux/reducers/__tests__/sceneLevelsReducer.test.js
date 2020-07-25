@@ -1,6 +1,6 @@
 import reducer from '../sceneLevelsReducer';
 
-import { tags } from '../../action/sceneLevelActions';
+import { tags } from '../../action/sceneLevelsActions';
 
 jest.mock('uuid', () =>
 	({
