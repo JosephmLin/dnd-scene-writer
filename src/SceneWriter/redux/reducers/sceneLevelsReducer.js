@@ -1,5 +1,5 @@
 import { tags } from '../action/sceneLevelsActions';
-import { adjust, always, applySpec, remove, nth, cond, pipe, pathOr, prop, propEq, T, insert, evolve } from 'ramda';
+import { adjust, always, applySpec, equals, remove, nth, cond, pipe, pathOr, prop, propEq, T, insert, evolve, map, reject, filter } from 'ramda';
 import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
@@ -41,7 +41,7 @@ const generateAddNewSceneLevelState = (id, index, sceneLevel, state) => {
 	})(state);
 }
 
-const addSceneSet = state => ({ payload: { id, index, sceneLevel } }) => generateAddNewSceneLevelState(id, index, sceneLevel, state);
+const addSceneLevel = state => ({ payload: { id, index, sceneLevel } }) => generateAddNewSceneLevelState(id, index, sceneLevel, state);
 
 
 const generateRemoveSceneLevelState = index => ({
@@ -52,7 +52,19 @@ const generateRemoveSceneLevelState = index => ({
 	)
 })
 
-const removeSceneSet = action => ({ payload: { index } }) => applySpec(generateRemoveSceneLevelState(index))(action);
+const removeSceneLevel = state => ({ payload: { index } }) => applySpec(generateRemoveSceneLevelState(index))(state);
+
+const removeScene = state => ({ payload: { id } }) => applySpec({
+	state: always(tags.REMOVE_SCENE_TAG),
+	sceneLevels: pipe(
+		prop('sceneLevels'),
+		map(
+			evolve({
+				scenes: reject(equals(id))
+			})
+		)
+	)
+})(state);
 
 const typeEquals = propEq('type');
 
@@ -72,8 +84,9 @@ const typeEquals = propEq('type');
  */
 const reducer = (state = initialState, action) => {
 	return cond([
-		[ typeEquals(tags.ADD_SCENE_LEVEL_TAG), addSceneSet(state) ],
-		[ typeEquals(tags.REMOVE_SCENE_LEVEL_TAG), removeSceneSet(state) ],
+		[ typeEquals(tags.ADD_SCENE_LEVEL_TAG), addSceneLevel(state) ],
+		[ typeEquals(tags.REMOVE_SCENE_LEVEL_TAG), removeSceneLevel(state) ],
+		[ typeEquals(tags.REMOVE_SCENE_TAG), removeScene(state) ],
 		[ T, always(state) ]
 	])(action);
 }
@@ -85,6 +98,6 @@ const reducer = (state = initialState, action) => {
  * @param {ReduxStore} store
  * @returns {Array.<>}
  */
-export const getSceneSet = pathOr([], [ 'sceneLevelsReducer', 'sceneLevels' ])
+export const getSceneLevels = pathOr([], [ 'sceneLevelsReducer', 'sceneLevels' ])
 
 export default reducer;

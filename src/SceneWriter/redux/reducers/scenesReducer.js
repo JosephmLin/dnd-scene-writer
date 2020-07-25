@@ -67,6 +67,6 @@ const reducer = (state = initialState, action) => {
  * @param {ReduxStore} store
  * @returns {Array.<>}
  */
-export const getSceneSet = pathOr([], [ 'sceneReducer', 'scenes' ])
+export const getScene = pathOr([], [ 'sceneReducer', 'scenes' ])
 
 export default reducer;

@@ -47,18 +47,19 @@ describe('addSceneReducer', () => {
 		}
 	};
 
-	const testRemoveAction = {
+	const testRemoveLevelAction = {
 		type: tags.REMOVE_SCENE_LEVEL_TAG,
 		payload: {
 			index: 0
 		}
 	}
+
 	test('should run reducer with undefined state', () => {
 		expect(reducer(undefined, addSceneLevelZeroIndexZero)).toEqual({
 			sceneLevels: [ { id: 'sceneLevel - uuid', scenes: [ 'id-here - 0' ] } ],
 			state: tags.ADD_SCENE_LEVEL_TAG
 		});
-		expect(reducer(undefined, testRemoveAction)).toEqual({
+		expect(reducer(undefined, testRemoveLevelAction)).toEqual({
 			sceneLevels: [],
 			state: tags.REMOVE_SCENE_LEVEL_TAG
 		});
@@ -91,9 +92,29 @@ describe('addSceneReducer', () => {
 	});
 
 	test('should delete sceneSet from state', () => {
-		expect(reducer(testState, testRemoveAction)).toEqual({
+		expect(reducer(testState, testRemoveLevelAction)).toEqual({
 			sceneLevels: [],
 			state: tags.REMOVE_SCENE_LEVEL_TAG
 		})
+	});
+
+	test('should delete scene from state', () => {
+
+		const testRemoveLevelAction = {
+			type: tags.REMOVE_SCENE_TAG,
+			payload: {
+				id: 'scene - uuid'
+			}
+		}
+		const testStateWithScene = {
+			sceneLevels: [ { id: 'sceneLevel - 0', scenes: [ 'scene - uuid' ] } ]
+		};
+
+		expect(reducer(testStateWithScene, testRemoveLevelAction)).toEqual({
+			state: tags.REMOVE_SCENE_TAG,
+			sceneLevels: [
+				{ id: 'sceneLevel - 0', scenes: [] }
+			]
+		});
 	})
 });

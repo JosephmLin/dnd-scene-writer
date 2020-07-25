@@ -1,20 +1,20 @@
-import { pipe, objOf, tap } from 'ramda';
+import { pipe, objOf } from 'ramda';
 
 import { actions as sceneLevelActions } from '../redux/action/sceneLevelsActions';
 import { actions as sceneActions } from '../redux/action/scenesActions';
-import { getSceneSet } from '../redux/reducers/sceneLevelsReducer';
+import { getSceneLevels } from '../redux/reducers/sceneLevelsReducer';
 import { connect } from 'react-redux';
 
-export const storePropKey = 'sceneSetsHOC';
+export const storePropKey = 'sceneLevelsHOC';
 
 /**
- * @function sceneSetsHOC
+ * @function sceneLevelssHOC
  * @description A functional higher order component that 
  * @param {*} WrappedComponent connects this component to the store, specifically
  */
 export default function sceneSetsHOC(WrappedComponent) {
 	const mapStateToProps = pipe(
-		getSceneSet,
+		getSceneLevels,
 		objOf(storePropKey)
 	)
 
