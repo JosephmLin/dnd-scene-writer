@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 import SceneHomePage from './SceneWriter/SceneHomePage';
-import SortablePage from './SceneWriter/drag-and-drop/SortablePage';
+import SortablePage from './drag-and-drop/SortablePage';
 
 function App() {
   // needs react-router at a later time for each of these headers

@@ -1,10 +1,15 @@
 import React from 'react';
+import { map } from 'ramda';
+import SceneCard from './SceneCard';
+import { Button } from '@material-ui/core';
 
-const SceneLevel = (props) => {
+function SceneLevel(props) {
+	const generateSceneCard = scene => (<SceneCard key={scene} />)
 	return (
-		<div>
-			{props.}
-		</div>
+		<>
+			{map(generateSceneCard, props.scenes)}
+			<Button onClick={props.removeLevel}>Delete Scene Level</Button>
+		</>
 	)
 }
 

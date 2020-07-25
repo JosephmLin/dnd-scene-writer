@@ -6,7 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import SaveDialog from '../common/SaveDialog';
 import SceneSetup from './SceneSetup';
 import ClearIcon from '@material-ui/icons/Clear';
-import SortableParent from './drag-and-drop/SortableParent';
+import SortableParent from '../drag-and-drop/SortableParent';
 
 import './SceneCard.css';
 /**

@@ -1,11 +1,11 @@
 // import { toPairs, adjust, replace, pipe, fromPairs, map, tap } from 'react';
 
-const UPDATE_SCENE = 'ADD_SCENE'
+const UPDATE_SCENE_TAG = 'ADD_SCENE'
 const REMOVE_SCENE_TAG = 'REMOVE_SCENE'
 const FAILURE_UPDATE_SCENE = 'FAILURE-ADD_SCENE'
 
 export const tags = {
-	UPDATE_SCENE,
+	UPDATE_SCENE_TAG,
 	REMOVE_SCENE_TAG,
 	FAILURE_UPDATE_SCENE
 };
@@ -20,6 +20,6 @@ const actionMaker = tag => payload => ({
 
 
 export const actions = {
-	UPDATE_SCENE_ACTION: actionMaker(UPDATE_SCENE),
+	UPDATE_SCENE_ACTION: actionMaker(UPDATE_SCENE_TAG),
 	REMOVE_SCENE_ACTION: actionMaker(REMOVE_SCENE_TAG)
 }

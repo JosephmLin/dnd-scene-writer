@@ -1,5 +1,5 @@
-import { tags } from '../action/sceneLevelActions';
-import { adjust, always, applySpec, remove, of, nth, cond, pipe, pathOr, prop, propEq, T, insert, evolve } from 'ramda';
+import { tags } from '../action/sceneLevelsActions';
+import { adjust, always, applySpec, remove, nth, cond, pipe, pathOr, prop, propEq, T, insert, evolve } from 'ramda';
 import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {

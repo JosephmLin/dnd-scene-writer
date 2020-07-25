@@ -4,31 +4,31 @@ import { v4 as uuidv4 } from 'uuid';
 import './SceneHomePage.css';
 import React from 'react';
 import sceneHomePageHOC, { storePropKey } from './hoc/sceneHomePageHOC';
-import { map } from 'ramda';
+import { addIndex, map, pipe, nth, prop } from 'ramda';
 
+const mapIndex = addIndex(map);
 
 function SceneHomePage({ [ storePropKey ]: SCENESET, addNewScene, addSceneLevelDispatch, removeScene, removeSceneLevelDispatch }) {
 	const addSceneLevel = sceneLevel => () => {
 		const newSceneId = `scene - ${uuidv4()}`;
-		const newSceneLevelId = `sceneLevel - ${uuidv4()}`;
+		// This creates a relationship between scene level and scene
 		addSceneLevelDispatch({
-			id: newSceneLevelId,
+			id: newSceneId,
 			index: 0,
 			sceneLevel
 		});
-		addSceneLevelDispatch({
-			id: newSceneId,
-			index: -1,
-			sceneLevel
-		});
+
+		// Base definition of a scene
 		addNewScene({
 			id: newSceneId
 		})
 	};
 
 	const removeSceneLevel = index => {
-		const idsOnSceneLevel = SCENESET[ index ];
-		console.log('ids On Scene Level  ', idsOnSceneLevel);
+		const idsOnSceneLevel = pipe(
+			nth(index),
+			prop('scenes')
+		)(SCENESET);
 		return () => {
 			removeSceneLevelDispatch({
 				index
@@ -40,9 +40,11 @@ function SceneHomePage({ [ storePropKey ]: SCENESET, addNewScene, addSceneLevelD
 		}
 	}
 
+	const generateSceneLevels = (scenesOnLevel, sceneLevel) => (<SceneLevel key={scenesOnLevel.id} scenes={scenesOnLevel.scenes} removeLevel={removeSceneLevel(sceneLevel)} />);
+
 	return <div className="SceneHomePage">
 		<Button className="SceneHomePage-Button" onClick={addSceneLevel(SCENESET.length)}>Add New Scene Level</Button>
-		{SCENESET.map((scenesOnLevel, sceneLevel) => (<SceneLevel key={scenesOnLevel[ 0 ]} removeLevel={removeSceneLevel(sceneLevel)} />))}
+		{mapIndex(generateSceneLevels, SCENESET)}
 		{/* The above code should be rendering each Scene Level */}
 	</div>
 }

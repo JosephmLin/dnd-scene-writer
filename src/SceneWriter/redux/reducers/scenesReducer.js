@@ -19,7 +19,7 @@ const initialState = {
 };
 
 const generateUpdateSceneState = (state, sceneData) => applySpec({
-	state: always(tags.Update_SCENE_TAG),
+	state: always(tags.UPDATE_SCENE_TAG),
 	scenes: pipe(
 		prop('scenes'),
 		assoc(sceneData.id, sceneData)
@@ -54,7 +54,7 @@ const typeEquals = propEq('type');
  */
 const reducer = (state = initialState, action) => {
 	return cond([
-		[ typeEquals(tags.Update_SCENE_TAG), updateScene(state) ],
+		[ typeEquals(tags.UPDATE_SCENE_TAG), updateScene(state) ],
 		[ typeEquals(tags.REMOVE_SCENE_TAG), removeScene(state) ],
 		[ T, always(state) ]
 	])(action);

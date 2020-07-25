@@ -1,8 +1,8 @@
-import { pipe, objOf } from 'ramda';
+import { pipe, objOf, tap } from 'ramda';
 
-import { actions as sceneLevelActions } from './redux/action/sceneLevelActions';
-import { actions as sceneActions } from './redux/action/sceneActions';
-import { getSceneSet } from './redux/reducers/sceneSetsReducer';
+import { actions as sceneLevelActions } from '../redux/action/sceneLevelsActions';
+import { actions as sceneActions } from '../redux/action/scenesActions';
+import { getSceneSet } from '../redux/reducers/sceneLevelsReducer';
 import { connect } from 'react-redux';
 
 export const storePropKey = 'sceneSetsHOC';
@@ -19,11 +19,11 @@ export default function sceneSetsHOC(WrappedComponent) {
 	)
 
 	const mapDispatchToProps = dispatch => ({
-		addSceneLevelDispatch: sceneSet => dispatch(sceneLevelActions.ADD_SCENE_SET_ACTION(sceneSet)),
-		removeSceneLevelDispatch: sceneLevel => dispatch(sceneLevelActions.REMOVE_SCENE_SET_ACTION(sceneLevel)),
+		addSceneLevelDispatch: sceneSet => dispatch(sceneLevelActions.ADD_SCENE_LEVEL_ACTION(sceneSet)),
+		removeSceneLevelDispatch: sceneLevel => dispatch(sceneLevelActions.REMOVE_SCENE_LEVEL_ACTION(sceneLevel)),
 		addNewScene: sceneData => dispatch(sceneActions.UPDATE_SCENE_ACTION(sceneData)),
 		removeScene: index => dispatch(sceneActions.REMOVE_SCENE_ACTION(index))
-	})
+	});
 
 	return connect(mapStateToProps, mapDispatchToProps)(WrappedComponent);
 }

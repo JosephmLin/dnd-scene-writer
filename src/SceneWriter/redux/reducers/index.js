@@ -1,8 +1,10 @@
-import sceneSetsReducer from './sceneSetsReducer';
+import sceneLevelsReducer from './sceneLevelsReducer';
+import scenesReducer from './scenesReducer';
 // import removeScene from './removeScene';
 
 const reducer = {
-	sceneSetsReducer
+	sceneLevelsReducer,
+	scenesReducer
 };
 
 export default reducer;
