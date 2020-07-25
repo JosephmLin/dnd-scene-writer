@@ -1,13 +1,13 @@
 // import { toPairs, adjust, replace, pipe, fromPairs, map, tap } from 'react';
 
-const ADD_SCENE_SET_TAG = 'ADD_SCENE_SET'
-const REMOVE_SCENE_SET_TAG = 'REMOVE_SCENE_SET'
-const FAILURE_ADD_SCENE_TAG = 'FAILURE-ADD_SCENE'
+const ADD_SCENE_LEVEL_TAG = 'ADD_SCENE_LEVEL'
+const REMOVE_SCENE_LEVEL_TAG = 'REMOVE_SCENE_LEVEL'
+const FAILURE_ADD_SCENE_LEVEL_TAG = 'FAILURE-ADD_SCENE_LEVEL'
 
 export const tags = {
-	ADD_SCENE_SET_TAG,
-	REMOVE_SCENE_SET_TAG,
-	FAILURE_ADD_SCENE_TAG
+	ADD_SCENE_LEVEL_TAG,
+	REMOVE_SCENE_LEVEL_TAG,
+	FAILURE_ADD_SCENE_LEVEL_TAG
 };
 
 /**
@@ -35,6 +35,6 @@ const actionMaker = tag => payload => ({
  * @prop {} sceneData
  */
 export const actions = {
-	ADD_SCENE_SET_ACTION: actionMaker(ADD_SCENE_SET_TAG),
-	REMOVE_SCENE_SET_ACTION: actionMaker(REMOVE_SCENE_SET_TAG)
+	ADD_SCENE_LEVEL_ACTION: actionMaker(ADD_SCENE_LEVEL_TAG),
+	REMOVE_SCENE_LEVEL_ACTION: actionMaker(REMOVE_SCENE_LEVEL_TAG)
 }

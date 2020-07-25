@@ -18,15 +18,15 @@ const initialState = {
 	scenes: {}
 };
 
-const generateAddSceneState = (state, sceneData) => applySpec({
-	state: always(tags.ADD_SCENE_TAG),
+const generateUpdateSceneState = (state, sceneData) => applySpec({
+	state: always(tags.Update_SCENE_TAG),
 	scenes: pipe(
 		prop('scenes'),
 		assoc(sceneData.id, sceneData)
 	)
 })(state)
 
-const addScene = state => ({ payload: { sceneData } }) => generateAddSceneState(state, sceneData);
+const updateScene = state => ({ payload }) => generateUpdateSceneState(state, payload);
 
 const generateRemoveSceneState = (state, id) => ({
 	state: tags.REMOVE_SCENE_TAG,
@@ -41,7 +41,7 @@ const removeScene = state => ({ payload: { id } }) => generateRemoveSceneState(s
 const typeEquals = propEq('type');
 
 /**
- * @typedef AddSceneAction
+ * @typedef UpdateSceneAction
  * @prop {Object} payload
  * @prop {Scene} payload.scene
  * @prop {string} tags
@@ -50,11 +50,11 @@ const typeEquals = propEq('type');
 /**
  * @function reducer
  * @param {Object} state 
- * @param {AddSceneAction} action 
+ * @param {UpdateSceneAction} action 
  */
 const reducer = (state = initialState, action) => {
 	return cond([
-		[ typeEquals(tags.ADD_SCENE_TAG), addScene(state) ],
+		[ typeEquals(tags.Update_SCENE_TAG), updateScene(state) ],
 		[ typeEquals(tags.REMOVE_SCENE_TAG), removeScene(state) ],
 		[ T, always(state) ]
 	])(action);

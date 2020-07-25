@@ -11,10 +11,8 @@ describe('addSceneReducer', () => {
 	const addSceneData = {
 		type: tags.ADD_SCENE_TAG,
 		payload: {
-			sceneData: {
-				data: '123',
-				id: 'id-here - 0'
-			}
+			data: '123',
+			id: 'id-here - 0'
 		}
 	};
 	const testRemoveAction = {
@@ -26,14 +24,14 @@ describe('addSceneReducer', () => {
 	test('should add scene', () => {
 		expect(reducer(undefined, addSceneData)).toEqual({
 			scenes: {
-				'id-here - 0': addSceneData.payload.sceneData
+				'id-here - 0': addSceneData.payload
 			},
 			state: tags.ADD_SCENE_TAG
 		});
 
 		expect(reducer(testState, addSceneData)).toEqual({
 			scenes: {
-				'id-here - 0': addSceneData.payload.sceneData,
+				'id-here - 0': addSceneData.payload,
 				test: 'b',
 				'id-here-1': 'a'
 			},

@@ -1,14 +1,19 @@
-import reducer from '../sceneSetsReducer';
+import reducer from '../sceneLevelsReducer';
 
-import { tags } from '../../action/sceneSetsActions';
+import { tags } from '../../action/sceneLevelActions';
 
+jest.mock('uuid', () =>
+	({
+		v4: () => 'uuid'
+	})
+);
 describe('addSceneReducer', () => {
 	const testState = {
-		sceneSets: [ [ 'test' ] ]
+		sceneLevels: [ { id: 'sceneLevel - 0', scenes: [] } ]
 	};
 
 	const addSceneLevelZeroIndexZero = {
-		type: tags.ADD_SCENE_SET_TAG,
+		type: tags.ADD_SCENE_LEVEL_TAG,
 		payload: {
 			id: 'id-here - 0',
 			index: 0,
@@ -16,7 +21,7 @@ describe('addSceneReducer', () => {
 		}
 	};
 	const addSceneLevelZeroIndexOne = {
-		type: tags.ADD_SCENE_SET_TAG,
+		type: tags.ADD_SCENE_LEVEL_TAG,
 		payload: {
 			id: 'id-here - 1',
 			index: 1,
@@ -25,7 +30,7 @@ describe('addSceneReducer', () => {
 	};
 
 	const addSceneLevelZeroIndexNegativeOne = {
-		type: tags.ADD_SCENE_SET_TAG,
+		type: tags.ADD_SCENE_LEVEL_TAG,
 		payload: {
 			id: 'id-here - 1',
 			index: -1,
@@ -34,7 +39,7 @@ describe('addSceneReducer', () => {
 	};
 
 	const addSceneLevelOneIndexZero = {
-		type: tags.ADD_SCENE_SET_TAG,
+		type: tags.ADD_SCENE_LEVEL_TAG,
 		payload: {
 			id: 'id-here - 1',
 			index: 0,
@@ -43,52 +48,52 @@ describe('addSceneReducer', () => {
 	};
 
 	const testRemoveAction = {
-		type: tags.REMOVE_SCENE_SET_TAG,
+		type: tags.REMOVE_SCENE_LEVEL_TAG,
 		payload: {
 			index: 0
 		}
 	}
 	test('should run reducer with undefined state', () => {
 		expect(reducer(undefined, addSceneLevelZeroIndexZero)).toEqual({
-			sceneSets: [ [ 'id-here - 0' ] ],
-			state: tags.ADD_SCENE_SET_TAG
+			sceneLevels: [ { id: 'sceneLevel - uuid', scenes: [ 'id-here - 0' ] } ],
+			state: tags.ADD_SCENE_LEVEL_TAG
 		});
 		expect(reducer(undefined, testRemoveAction)).toEqual({
-			sceneSets: [],
-			state: tags.REMOVE_SCENE_SET_TAG
+			sceneLevels: [],
+			state: tags.REMOVE_SCENE_LEVEL_TAG
 		});
 
 	});
-	test('should add to sceneSets on SceneLevel 0', () => {
+	test('should add to sceneLevels on SceneLevel 0', () => {
 
 		expect(reducer(testState, addSceneLevelZeroIndexZero)).toEqual({
-			sceneSets: [ [ 'id-here - 0', 'test' ] ],
-			state: tags.ADD_SCENE_SET_TAG
+			sceneLevels: [ { scenes: [ 'id-here - 0' ], id: 'sceneLevel - 0' } ],
+			state: tags.ADD_SCENE_LEVEL_TAG
 		});
 
 		expect(reducer(testState, addSceneLevelZeroIndexOne)).toEqual({
-			sceneSets: [ [ 'test', 'id-here - 1' ] ],
-			state: tags.ADD_SCENE_SET_TAG
+			sceneLevels: [ { id: 'sceneLevel - 0', scenes: [ 'id-here - 1' ] } ],
+			state: tags.ADD_SCENE_LEVEL_TAG
 		});
 
 		expect(reducer(testState, addSceneLevelZeroIndexNegativeOne)).toEqual({
-			sceneSets: [ [ 'test', 'id-here - 1' ] ],
-			state: tags.ADD_SCENE_SET_TAG
+			sceneLevels: [ { id: 'sceneLevel - 0', scenes: [ 'id-here - 1' ] } ],
+			state: tags.ADD_SCENE_LEVEL_TAG
 		});
 
 	});
 
-	test('should add to sceneSets on SceneLevel 1', () => {
+	test('should add to sceneLevels on SceneLevel 1', () => {
 		expect(reducer(testState, addSceneLevelOneIndexZero)).toEqual({
-			sceneSets: [ [ 'test' ], [ 'id-here - 1' ] ],
-			state: tags.ADD_SCENE_SET_TAG
+			sceneLevels: [ { id: 'sceneLevel - 0', scenes: [] }, { id: 'sceneLevel - uuid', scenes: [ 'id-here - 1' ] } ],
+			state: tags.ADD_SCENE_LEVEL_TAG
 		});
 	});
 
 	test('should delete sceneSet from state', () => {
 		expect(reducer(testState, testRemoveAction)).toEqual({
-			sceneSets: [],
-			state: tags.REMOVE_SCENE_SET_TAG
+			sceneLevels: [],
+			state: tags.REMOVE_SCENE_LEVEL_TAG
 		})
 	})
 });
