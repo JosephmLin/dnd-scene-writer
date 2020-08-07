@@ -11,9 +11,27 @@ Each set of scenes makes one adventure.
 Create a Scene in DND.
 Each scene is a drag-and-drop board element.
 
+Add `Upload files using drag and drop` using react-dropzone
+https://blog.logrocket.com/drag-and-drop-in-react/
+
+Add custom tag section with color picker
+
+### TODO
+
+Add router for creating and updating new NPCs
+Add image loading component
+Reorganize repository
+Clean up visuals
+Create Python backend for CRUD
+
 ### Pages
 
+Scene Home Page
+It follows the following hierarchy:
+A Scene Set contains multiple Scene Levels
+A scene level can contain multiple scenes
 
+Scenes can have relationships between different scene levels
 
 ### `npm start`
 

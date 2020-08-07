@@ -1,19 +1,22 @@
-.Card {
-	margin: auto;
-	cursor: 'move'
+.SceneCard {
+  margin: 1em;
+  cursor: move;
+  order: 1;
+  flex-grow: 2;
+  align-self: flex-start;
 }
 
-.CardContent {
-	display: flex;
-	align-items: center;
+.SceneCardContent {
+  display: flex;
+  align-items: center;
 }
 
 .SceneName {
-	order: 1;
-	flex: 3
+  order: 1;
+  flex: 3;
 }
 
-.CardActions {
-	order: 2;
-	flex: 1;
+.SceneCardActions {
+  order: 2;
+  flex: 1;
 }

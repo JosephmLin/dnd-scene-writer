@@ -1,12 +1,23 @@
+import { pipe, objOf } from 'ramda';
+import { actions as sceneActions } from '../../redux/action/scenesActions';
+import { getScene } from '../../redux/reducers/scenesReducer';
+import { connect } from 'react-redux';
 
-import { v4 as uuidv4 } from 'uuid';
+export const storePropKey = 'sceneHOC';
 
-import { actions as sceneActions } from './redux/action/scenesActions';
+/**
+ * @function sceneHOC
+ * @description Retrieves data/functionality specific for SceneCard
+ * @param {*} WrappedComponent connects this component to the store, specifically
+ */
+export default function sceneSetsHOC(WrappedComponent) {
+  const mapStateToProps = pipe(getScene, objOf(storePropKey));
 
+  const mapDispatchToProps = (dispatch) => ({
+    updateScene: (sceneData) =>
+      dispatch(sceneActions.UPDATE_SCENE_ACTION(sceneData)),
+    removeScene: (index) => dispatch(sceneActions.REMOVE_SCENE_ACTION(index)),
+  });
 
-updateScene: sceneData => dispatch(sceneActions.UPDATE_SCENE_ACTION(sceneData)),
-	addNewScene: sceneData => dispatch(sceneActions.UPDATE_SCENE_ACTION({
-		...sceneData,
-		id: `scene - ${uuidv4()}`
-	})),
-		removeScene: scene => dispatch(sceneActions.REMOVE_SCENE_ACTION(scene))
+  return connect(mapStateToProps, mapDispatchToProps)(WrappedComponent);
+}

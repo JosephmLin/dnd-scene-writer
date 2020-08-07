@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import reducers from '../SceneWriter/redux/reducers';
+import reducers from './reducers';
 
 export default combineReducers({
-	...reducers
-})
+  ...reducers,
+});

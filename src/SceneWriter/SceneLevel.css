@@ -1,0 +1,18 @@
+.SceneLevel {
+  display: flex;
+  margin: 1em;
+  justify-content: space-evenly;
+}
+
+.SceneCards {
+  order: 2;
+  display: flex;
+  flex-direction: row;
+}
+
+.DeleteButton {
+  order: 1;
+  margin: 1em;
+  height: min-content;
+  align-self: center;
+}
