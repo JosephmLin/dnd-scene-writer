@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/core/Autocomplete';
 const SceneLocation = ({ onLocationChange, location }) => {
   const updateLocation = (key) => (e) => {
     onLocationChange({

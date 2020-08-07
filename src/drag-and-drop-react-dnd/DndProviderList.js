@@ -29,6 +29,7 @@ function DndProviderList() {
   return (
     <DndProvider backend={HTML5Backend}>
       <CardList cards={cards} moveCard={moveCard}></CardList>
+      <CardList cards={cards} moveCard={moveCard}></CardList>
     </DndProvider>
   );
 }

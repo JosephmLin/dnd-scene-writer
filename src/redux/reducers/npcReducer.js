@@ -14,15 +14,9 @@ import {
 
 /**
  * @typedef
- * @name scene
- * @description This is a mapping of sceneSet to an a
- */
-
-/**
- * @typedef
- * @name SceneState
+ * @name NPCState
  * @prop {String} state
- * @prop {Object} scenes
+ * @prop {Object} npcs
  */
 const initialState = {
   state: undefined,
@@ -39,11 +33,11 @@ const updateOrAddNPC = (state) => ({ payload }) =>
   generateUpdateOrAddNPC(state, payload);
 
 const generateRemoveNPCState = (state, id) => ({
-  state: tags.REMOVE_SCENE_TAG,
+  state: tags.REMOVE_NPC,
   npcs: pipe(prop('npcs'), dissoc(id))(state),
 });
 
-const removeScene = (state) => ({ payload: { id } }) =>
+const removeNPC = (state) => ({ payload: { id } }) =>
   generateRemoveNPCState(state, id);
 
 const typeEquals = propEq('type');
@@ -63,7 +57,7 @@ const typeEquals = propEq('type');
 const reducer = (state = initialState, action) => {
   return cond([
     [typeEquals(tags.UPDATE_OR_ADD_NPC), updateOrAddNPC(state)],
-    [typeEquals(tags.REMOVE_NPC), removeScene(state)],
+    [typeEquals(tags.REMOVE_NPC), removeNPC(state)],
     [T, always(state)],
   ])(action);
 };

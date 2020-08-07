@@ -1,5 +1,5 @@
 import { always, pipe, prop, remove, applySpec } from 'ramda';
-import { tags } from '../../../../redux/action/sceneLevelsActions';
+import { tags } from '../../action/sceneLevelsActions';
 
 const generateRemoveSceneLevelState = (index) =>
   applySpec({

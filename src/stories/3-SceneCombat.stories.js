@@ -1,18 +1,21 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import SceneCombat from '../SceneWriter/SceneDefinition/SceneCombat';
+import CommonTabs from '../components/CommonTabs';
 
 export default {
-  title: 'SceneCombat',
-  component: SceneCombat,
+  title: 'Common Tabs',
+  component: CommonTabs,
 };
 
-let combat = {};
+let tabLabels = [1, 2, 3, 4];
 
-const onCombatChange = (val) => {
-  action('updated');
+let tabComponents = {
+  1: <div> hello world 1 </div>,
+  2: <div> hello world 2 </div>,
+  3: <div> hello world 3 </div>,
+  4: <div> hello world 4 </div>,
 };
 
 export const SceneCombatStory = () => (
-  <SceneCombat combat={combat} onCombatChange={onCombatChange} />
+  <CommonTabs tabLabels={tabLabels} tabComponents={tabComponents} />
 );

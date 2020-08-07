@@ -1,5 +1,5 @@
 import { pipe, objOf } from 'ramda';
-import { actions as npcActions } from '../redux/action/npcActions';
+import { actions as npcActions } from '../../redux/action/npcActions';
 import { getNPCs } from '../../redux/reducers/npcReducer';
 import { connect } from 'react-redux';
 

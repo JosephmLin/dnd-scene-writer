@@ -10,7 +10,7 @@ export const storePropKey = 'sceneHOC';
  * @description Retrieves data/functionality specific for SceneCard
  * @param {*} WrappedComponent connects this component to the store, specifically
  */
-export default function sceneSetsHOC(WrappedComponent) {
+export default function sceneCardHOC(WrappedComponent) {
   const mapStateToProps = pipe(getScene, objOf(storePropKey));
 
   const mapDispatchToProps = (dispatch) => ({

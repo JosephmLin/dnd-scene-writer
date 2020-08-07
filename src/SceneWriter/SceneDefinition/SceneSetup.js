@@ -9,7 +9,7 @@ import SceneDescription from './SceneDescription';
 import SceneCombat from './SceneCombat';
 import SceneNPCs from '../../components/NPCAutofillComponent';
 import SceneLocation from './SceneLocation';
-import SceneTabs from './SceneTabs';
+import CommonTabs from '../../components/CommonTabs';
 
 const editField = (setField) => pipe(path(['target', 'value']), setField);
 const handleCheck = (setField) => pipe(path(['target', 'checked']), setField);
@@ -41,27 +41,20 @@ export default function SceneSetup({ name, save }) {
     save(buildScene());
   };
 
-  const showDescription = () => {
-    return (
+  const tabLabels = ['Description', 'Combat', 'NPCs', 'Locations'];
+  const tabComponents = {
+    Description: (
       <SceneDescription
         description={description}
         onDescriptionChange={setDescription}
       />
-    );
+    ),
+    Combat: <SceneCombat combat={combat} onCombatChange={setCombat} />,
+    NPCs: <SceneNPCs npcs={npcs} onNPCChange={setNPCs} />,
+    Locations: (
+      <SceneLocation location={location} onLocationChange={setLocation} />
+    ),
   };
-
-  const showCombat = () => {
-    return <SceneCombat combat={combat} onCombatChange={setCombat} />;
-  };
-
-  const showNPCs = () => {
-    return <SceneNPCs npcs={npcs} onNPCChange={setNPCs} />;
-  };
-
-  const showLocations = () => {
-    return <SceneLocation location={location} onLocationChange={setLocation} />;
-  };
-
   return (
     <React.Fragment>
       <TextField
@@ -81,10 +74,6 @@ export default function SceneSetup({ name, save }) {
           value={abstract}
           onChange={editField(setAbstract)}
         />
-        <SceneDescription
-          description={description}
-          onDescriptionChange={editField(setDescription)}
-        />
         <FormControlLabel
           value="end"
           checked={hasCombat}
@@ -93,13 +82,7 @@ export default function SceneSetup({ name, save }) {
           label="Combat"
           labelPlacement="end"
         />
-        <SceneTabs
-          hasCombat={hasCombat}
-          showDescription={showDescription}
-          showCombat={showCombat}
-          showNPCs={showNPCs}
-          showLocations={showLocations}
-        />
+        <CommonTabs tabLabels={tabLabels} tabComponents={tabComponents} />
         <Button type="submit"> Save Scene </Button>
       </form>
     </React.Fragment>

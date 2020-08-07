@@ -1,4 +1,4 @@
-import { tags } from '../../../../redux/action/sceneLevelsActions';
+import { tags } from '../../action/sceneLevelsActions';
 import { pipe, prop, adjust, move, applySpec } from 'ramda';
 
 const moveScene = (state) => ({

@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import SaveDialog from '../components/SaveDialog';
 import SceneSetup from './SceneDefinition/SceneSetup';
 import ClearIcon from '@material-ui/icons/Clear';
-import sceneHOC, { storePropKey } from './hoc/sceneHOC';
+import sceneHOC, { storePropKey } from './hoc/sceneCardHOC';
 import { TYPES } from './constants/DraggableTypes';
 import './SceneCard.css';
 /**
@@ -29,7 +29,7 @@ function SceneCard({
   id,
   index,
 }) {
-  const [name, setName] = useState('');
+  const [name, setName] = useState(SCENE.name ? SCENE.name : '');
 
   const [open, setOpen] = useState(false);
 

@@ -1,6 +1,6 @@
 import { tags } from '../action/sceneLevelsActions';
 import { always, cond, pathOr, propEq, T } from 'ramda';
-import helpers from '../../SceneWriter/redux/reducers/helpers';
+import helpers from './helpers';
 
 const initialState = {
   state: undefined,
@@ -45,7 +45,7 @@ const reducer = (state = initialState, action) => {
 
 /**
  * @function
- * @name getsceneLevels
+ * @name getSceneLevels
  * @description This retrieves store data as established by this reducer
  * @param {ReduxStore} store
  * @returns {Array.<>}

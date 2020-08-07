@@ -8,7 +8,7 @@ import {
   reject,
   equals,
 } from 'ramda';
-import { tags } from '../../../../redux/action/sceneLevelsActions';
+import { tags } from '../../action/sceneLevelsActions';
 
 const removeScene = (state) => ({ payload: { id } }) =>
   applySpec({

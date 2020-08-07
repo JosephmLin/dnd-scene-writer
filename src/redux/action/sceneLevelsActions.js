@@ -1,5 +1,13 @@
 // import { toPairs, adjust, replace, pipe, fromPairs, map, tap } from 'react';
-
+// This should work, but doesn't. I'll do more investigation later
+// const actions2 = pipe(
+// 	map(actionMaker),
+// 	toPairs,
+// 	map(
+// 		adjust(0, replace('_TAG', '_ACTION'))
+// 	),
+// 	fromPairs
+// );
 const ADD_NEW_SCENE_OR_SCENE_LEVEL_TAG = 'ADD_NEW_SCENE_OR_SCENE_LEVEL';
 const MOVE_SCENE_LEVEL_TAG = 'MOVE_SCENE_LEVEL';
 const MOVE_SCENE_TAG = 'MOVE_SCENE';
@@ -21,15 +29,6 @@ const actionMaker = (tag) => (payload) => ({
   payload,
   type: tag,
 });
-
-// const actions2 = pipe(
-// 	map(actionMaker),
-// 	toPairs,
-// 	map(
-// 		adjust(0, replace('_TAG', '_ACTION'))
-// 	),
-// 	fromPairs
-// );
 
 export const actions = {
   ADD_NEW_SCENE_OR_SCENE_LEVEL_ACTION: actionMaker(

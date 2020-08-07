@@ -23,6 +23,7 @@ Add image loading component
 Reorganize repository
 Clean up visuals
 Create Python backend for CRUD
+Research CSS libraries
 
 ### Pages
 

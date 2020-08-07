@@ -2,8 +2,7 @@ import React, { useRef } from 'react';
 import { map, addIndex } from 'ramda';
 import SceneCard from './SceneCard';
 import { Button } from '@material-ui/core';
-import { DndProvider, useDrop, useDrag } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { useDrop, useDrag } from 'react-dnd';
 import { TYPES } from './constants/DraggableTypes';
 import './SceneLevel.css';
 
@@ -54,11 +53,7 @@ Here we initialize both drag and drop on the same element (i.e., card component)
   };
 
   return (
-    <div
-      ref={ref}
-      className="SceneLevel"
-      style={{ opacity: isDragging ? 0.5 : 1 }}
-    >
+    <div className="SceneLevel" style={{ opacity: isDragging ? 0.5 : 1 }}>
       <div className="SceneCards">
         {mapIndex(generateSceneCard, props.scenes)}
       </div>

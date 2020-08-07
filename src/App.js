@@ -3,8 +3,9 @@ import './App.css';
 import Navbar from './components/Navbar';
 import SceneHomePage from './SceneWriter/SceneHomePage';
 import DndProviderList from './drag-and-drop-react-dnd/DndProviderList';
-import SceneTabs from './SceneWriter/SceneDefinition/SceneTabs';
-import UpdateOrCreateNPC from './components/UpdateOrCreateNPC';
+import Sandbox from './drag-and-drop-beautiful/DndProvider';
+// import Sandbox2 from './drag-and-drop-beautiful/sandbox';
+import UpdateOrCreateNPC from './components/UpdateOrCreateNPCForm/UpdateOrCreateNPC';
 
 function App() {
   // needs react-router at a later time for each of these headers
@@ -13,11 +14,12 @@ function App() {
       <Navbar />
       {/* left navigation bar will hold denote the various sessions in the campaign. Each session depicts a set of scenes, NPCs and characters */}
       <div className="MainPage">
-        <SceneHomePage />
-        <UpdateOrCreateNPC />
+        {/* <SceneHomePage /> */}
+        {/* <UpdateOrCreateNPC /> */}
         {/* <HOC /> */}
         {/* <SortablePage /> */}
-        {/* <DndProviderList /> */}
+        <Sandbox />
+        {/* <Sandbox2 /> */}
       </div>
     </div>
   );

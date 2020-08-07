@@ -1,37 +1,9 @@
-import React, { useState } from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import npcStoreHOC, { storePropKey } from './hoc/npcStoreHOC';
+import React from 'react';
+import { TextField } from '@material-ui/core';
 
-const UpdateOrCreateSceneNPC = ({
-  [storePropKey]: NPCS,
-  updateOrAddNPC,
-  id,
-}) => {
-  const [npc, setNPC] = useState(NPCS[id] ? NPCS[id] : {});
-  const updateNPC = (key) => (e) => {
-    setNPC({
-      ...npc,
-      [key]: e.target.value,
-    });
-  };
-
-  const saveNPC = (e) => {
-    e.preventDefault();
-    updateOrAddNPC(npc);
-  };
-
+const DmgNPCTab = ({ npc, updateNPC }) => {
   return (
-    <form onSubmit={saveNPC}>
-      <TextField
-        id="NPCname"
-        label="Name"
-        required
-        placeholder="John Doe"
-        helperText="A Full NPC of the Scene"
-        value={npc.summary}
-        onChange={updateNPC('summary')}
-      />
+    <>
       <TextField
         id="ocupation"
         fullWidth
@@ -113,9 +85,8 @@ const UpdateOrCreateSceneNPC = ({
         value={npc.flaw}
         onChange={updateNPC('flaw')}
       />
-      <Button type="submit">{id ? 'Update' : 'Save New'} NPC</Button>
-    </form>
+    </>
   );
 };
 
-export default npcStoreHOC(UpdateOrCreateSceneNPC);
+export default DmgNPCTab;
