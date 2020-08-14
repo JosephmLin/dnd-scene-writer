@@ -8,13 +8,13 @@ import {
   reject,
   equals,
 } from 'ramda';
-import { tags } from '../../action/sceneLevelsActions';
+import { tags } from '../../action/sceneLayoutActions';
 
 const removeScene = (state) => ({ payload: { id } }) =>
   applySpec({
     state: always(tags.REMOVE_SCENE_TAG),
-    sceneLevels: pipe(
-      prop('sceneLevels'),
+    sceneLayout: pipe(
+      prop('sceneLayout'),
       map(
         evolve({
           scenes: reject(equals(id)),

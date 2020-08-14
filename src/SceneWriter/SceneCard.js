@@ -1,15 +1,14 @@
 import { Card, CardContent, TextField } from '@material-ui/core';
-import React, { useState, useRef } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
+import React, { useState } from 'react';
 import { pipe, path } from 'ramda';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import SaveDialog from '../components/SaveDialog';
 import SceneSetup from './SceneDefinition/SceneSetup';
 import ClearIcon from '@material-ui/icons/Clear';
-import sceneHOC, { storePropKey } from './hoc/sceneCardHOC';
-import { TYPES } from './constants/DraggableTypes';
+import sceneCardHOC, { storePropKey } from './hoc/sceneCardHOC';
 import './SceneCard.css';
+import { Draggable } from 'react-beautiful-dnd';
 /**
  * @typedef SceneProps
  * @param {string} name
@@ -22,10 +21,9 @@ import './SceneCard.css';
  */
 function SceneCard({
   [storePropKey]: SCENE,
-  updateScene,
+  updateOrAddScene,
   removeScene,
-  moveScene,
-  addScene,
+  appendNewScene,
   id,
   index,
 }) {
@@ -39,7 +37,7 @@ function SceneCard({
   const openDialog = () => setOpen(true);
   const removeObject = () => removeScene({ id });
   const saveAndClose = ({ ...data }) => {
-    updateScene({
+    updateOrAddScene({
       id,
       name,
       data,
@@ -47,56 +45,48 @@ function SceneCard({
     closeDialog();
   };
 
-  const ref = useRef(null);
-
-  const [, drop] = useDrop({
-    accept: TYPES.SCENE_CARD,
-    hover(item) {
-      if (!ref.current) {
-        return;
-      }
-      const dragIndex = item.index;
-      const hoverIndex = index;
-      if (dragIndex !== hoverIndex) {
-        moveScene(dragIndex, hoverIndex);
-        item.index = hoverIndex;
-      }
-    },
-  });
-
-  // useDrag will be responsible for making an element draggable. It also exposes "isDragging" method to add any styles while dragging
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: TYPES.SCENE_CARD, id: id, index: index },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
-
   return (
-    <Card ref={ref} className="SceneCard" raised={true}>
-      <CardContent className="SceneCardContent">
-        <TextField
-          className="SceneName"
-          label="Scene Name"
-          onChange={editName}
-          defaultValue={name}
-        />
-        <span className="SceneCardActions">
-          <EditIcon className="SceneEdit" onClick={openDialog} />
-          <ClearIcon className="SceneDelete" onClick={removeObject} />
-          <AddIcon className="AddScene" onClick={addScene} />
-        </span>
-        <SaveDialog
-          // title="Set up a Scene!"
-          // close={closeDialog}
-          // save={saveAndClose}
-          open={open}
+    <Draggable draggableId={id} index={index}>
+      {(provided, snapshot) => (
+        <Card
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          style={{
+            margin: '1em',
+            border: '1px solid lightgrey',
+            borderRadius: '2px',
+            ...provided.draggableProps.style,
+            opacity: snapshot.isDragging ? 0.5 : 1,
+          }}
+          className="SceneCard"
+          raised={true}
         >
-          <SceneSetup save={saveAndClose} close={closeDialog} />
-        </SaveDialog>
-      </CardContent>
-    </Card>
+          <CardContent className="SceneCardContent">
+            <TextField
+              className="SceneName"
+              label="Scene Name"
+              onChange={editName}
+              defaultValue={name}
+            />
+            <span className="SceneCardActions">
+              <EditIcon className="SceneEdit" onClick={openDialog} />
+              <ClearIcon className="SceneDelete" onClick={removeObject} />
+              <AddIcon className="AddScene" onClick={appendNewScene} />
+            </span>
+            <SaveDialog
+              // title="Set up a Scene!"
+              // close={closeDialog}
+              // save={saveAndClose}
+              open={open}
+            >
+              <SceneSetup save={saveAndClose} close={closeDialog} />
+            </SaveDialog>
+          </CardContent>
+        </Card>
+      )}
+    </Draggable>
   );
 }
 
-export default sceneHOC(SceneCard);
+export default sceneCardHOC(SceneCard);

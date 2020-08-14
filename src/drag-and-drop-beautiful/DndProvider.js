@@ -58,15 +58,6 @@ class DndProvider extends React.Component {
           const columnTasks = column.taskIds.map(
             (taskId) => this.state.tasks[taskId]
           );
-          console.log(column);
-          console.log(columnTasks);
-          // return (
-          //   <AlternateColumn
-          //     key={column.id}
-          //     column={column}
-          //     tasks={columnTasks}
-          //   />
-          // );
           return <Column key={column.id} column={column} tasks={columnTasks} />;
         })}
       </DragDropContext>

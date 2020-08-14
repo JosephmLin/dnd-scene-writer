@@ -28,6 +28,17 @@ export default function SceneSetup({ name, save }) {
   const [npcs, setNPCs] = useState({});
   const [location, setLocation] = useState({});
 
+  /**
+   * @typedef Scene
+   * @prop {String} abstract
+   * @prop {String} description
+   * @prop {String} name
+   * @prop {Object} combat
+   * @prop {String} combat.summary
+   * @prop {String} combat.resolution
+   * @prop {Array.<npc.id>} npcs
+   *
+   */
   const buildScene = () => ({
     abstract,
     description,

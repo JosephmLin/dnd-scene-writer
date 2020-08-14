@@ -14,8 +14,8 @@ export default function sceneCardHOC(WrappedComponent) {
   const mapStateToProps = pipe(getScene, objOf(storePropKey));
 
   const mapDispatchToProps = (dispatch) => ({
-    updateScene: (sceneData) =>
-      dispatch(sceneActions.UPDATE_SCENE_ACTION(sceneData)),
+    updateOrAddScene: (sceneData) =>
+      dispatch(sceneActions.UPDATE_OR_ADD_SCENE_ACTION(sceneData)),
     removeScene: (index) => dispatch(sceneActions.REMOVE_SCENE_ACTION(index)),
   });
 

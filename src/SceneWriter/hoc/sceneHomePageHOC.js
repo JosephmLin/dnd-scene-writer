@@ -1,8 +1,8 @@
 import { pipe, objOf } from 'ramda';
 
-import { actions as sceneLevelActions } from '../../redux/action/sceneLevelsActions';
+import { actions as sceneLayoutActions } from '../../redux/action/sceneLayoutActions';
 import { actions as sceneActions } from '../../redux/action/scenesActions';
-import { getSceneLevels } from '../../redux/reducers/sceneLevelsReducer';
+import { getSceneLayout } from '../../redux/reducers/sceneLayoutReducer';
 import { connect } from 'react-redux';
 
 export const storePropKey = 'sceneLevelsHOC';
@@ -13,19 +13,19 @@ export const storePropKey = 'sceneLevelsHOC';
  * @param {*} WrappedComponent connects this component to the store, specifically
  */
 export default function sceneSetsHOC(WrappedComponent) {
-  const mapStateToProps = pipe(getSceneLevels, objOf(storePropKey));
+  const mapStateToProps = pipe(getSceneLayout, objOf(storePropKey));
 
   const mapDispatchToProps = (dispatch) => ({
     addSceneLevelDispatch: (sceneSet) =>
-      dispatch(sceneLevelActions.ADD_NEW_SCENE_OR_SCENE_LEVEL_ACTION(sceneSet)),
+      dispatch(
+        sceneLayoutActions.ADD_NEW_SCENE_OR_SCENE_LEVEL_ACTION(sceneSet)
+      ),
     removeSceneLevelDispatch: (sceneLevel) =>
-      dispatch(sceneLevelActions.REMOVE_SCENE_LEVEL_ACTION(sceneLevel)),
-    moveSceneLevelDispatch: (fromIndex, toIndex) =>
-      dispatch(sceneLevelActions.MOVE_SCENE_LEVEL_ACTION(fromIndex, toIndex)),
-    moveSceneDispatch: (fromIndex, toIndex) =>
-      dispatch(sceneLevelActions.MOVE_SCENE_ACTION(fromIndex, toIndex)),
+      dispatch(sceneLayoutActions.REMOVE_SCENE_LEVEL_ACTION(sceneLevel)),
+    changeLayoutDispatch: (provided) =>
+      dispatch(sceneLayoutActions.CHANGE_SCENE_LAYOUT(provided)),
     addNewSceneDispatch: (sceneData) =>
-      dispatch(sceneActions.UPDATE_SCENE_ACTION(sceneData)),
+      dispatch(sceneActions.UPDATE_OR_ADD_SCENE_ACTION(sceneData)),
     removeSceneDispatch: (index) =>
       dispatch(sceneActions.REMOVE_SCENE_ACTION(index)),
   });

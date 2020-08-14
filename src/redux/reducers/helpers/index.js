@@ -1,13 +1,11 @@
 import addSceneLevel from './addSceneLevel';
-import moveScene from './moveScene';
-import moveSceneLevel from './moveSceneLevel';
+import changeLayout from './changeLayout';
 import removeScene from './removeScene';
 import removeSceneLevel from './removeSceneLevel';
 
 const helpers = {
   addSceneLevel,
-  moveScene,
-  moveSceneLevel,
+  changeLayout,
   removeScene,
   removeSceneLevel,
 };

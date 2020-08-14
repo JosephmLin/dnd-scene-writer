@@ -24,7 +24,7 @@ const SceneCombat = ({ onCombatChange, combat }) => {
         onChange={updateCombat('summary')}
       />
       <TextField
-        id="transition"
+        id="resolution"
         fullWidth
         label="Resolution/Transition"
         placeholder="The town is willing to pay them 1000 gp each to kill a dragon."

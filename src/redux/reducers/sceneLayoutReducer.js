@@ -1,4 +1,4 @@
-import { tags } from '../action/sceneLevelsActions';
+import { tags } from '../action/sceneLayoutActions';
 import { always, cond, pathOr, propEq, T } from 'ramda';
 import helpers from './helpers';
 
@@ -10,7 +10,7 @@ const initialState = {
    * 	 scenes: []
    * }]
    */
-  sceneLevels: [],
+  sceneLayout: [],
 };
 
 const typeEquals = propEq('type');
@@ -35,8 +35,7 @@ const reducer = (state = initialState, action) => {
       typeEquals(tags.ADD_NEW_SCENE_OR_SCENE_LEVEL_TAG),
       helpers.addSceneLevel(state),
     ],
-    [typeEquals(tags.MOVE_SCENE_LEVEL_TAG), helpers.moveSceneLevel(state)],
-    [typeEquals(tags.MOVE_SCENE_TAG), helpers.moveScene(state)],
+    [typeEquals(tags.CHANGE_SCENE_LAYOUT), helpers.changeLayout(state)],
     [typeEquals(tags.REMOVE_SCENE_LEVEL_TAG), helpers.removeSceneLevel(state)],
     [typeEquals(tags.REMOVE_SCENE_TAG), helpers.removeScene(state)],
     [T, always(state)],
@@ -50,6 +49,6 @@ const reducer = (state = initialState, action) => {
  * @param {ReduxStore} store
  * @returns {Array.<>}
  */
-export const getSceneLevels = pathOr([], ['sceneLevelsReducer', 'sceneLevels']);
+export const getSceneLayout = pathOr([], ['sceneLayoutReducer', 'sceneLayout']);
 
 export default reducer;

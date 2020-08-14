@@ -1,9 +1,9 @@
-import sceneLevelsReducer from './sceneLevelsReducer';
+import sceneLayoutReducer from './sceneLayoutReducer';
 import scenesReducer from './scenesReducer';
 import npcReducer from './npcReducer';
 
 const reducer = {
-  sceneLevelsReducer,
+  sceneLayoutReducer,
   scenesReducer,
   npcReducer,
 };

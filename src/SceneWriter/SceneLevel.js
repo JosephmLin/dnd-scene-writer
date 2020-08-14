@@ -1,72 +1,81 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { map, addIndex } from 'ramda';
 import SceneCard from './SceneCard';
 import { Button } from '@material-ui/core';
-import { useDrop, useDrag } from 'react-dnd';
-import { TYPES } from './constants/DraggableTypes';
 import './SceneLevel.css';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
+import DraggableTypes from '../constants/DraggableTypes';
 
 const mapIndex = addIndex(map);
-
+/**
+ * This component represents one Droppable , with a Draggable Component inside of it.
+ *
+ *
+ */
 function SceneLevel(props) {
-  const ref = useRef(null);
-
-  const [, drop] = useDrop({
-    accept: TYPES.SCENE_LEVEL,
-    hover(item) {
-      if (!ref.current) {
-        return;
-      }
-      const dragIndex = item.index;
-      const hoverIndex = props.index;
-      if (dragIndex !== hoverIndex) {
-        props.moveSceneLevel(dragIndex, hoverIndex);
-        item.index = hoverIndex;
-      }
-    },
-  });
-
-  // useDrag will be responsible for making an element draggable. It also exposes "isDragging" method to add any styles while dragging
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: TYPES.SCENE_LEVEL, id: props.id, index: props.index },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
-
-  /* 
-Initialize drag and drop into the element using its reference.
-Here we initialize both drag and drop on the same element (i.e., card component)
-*/
-  drag(drop(ref));
-  const generateSceneCard = (scene, index) => {
+  const generateSceneCard = (provided, snapshot) => (scene, index) => {
     return (
-      <SceneCard
-        className="SceneCard"
-        moveScene={props.moveScene}
-        id={scene.id}
-        index={index}
-        key={scene}
-        addScene={props.addScene}
-      />
+      <div
+        key={scene.id}
+        ref={provided.innerRef}
+        style={{
+          margin: '8px',
+          backgroundColor: snapshot.isDraggingOver ? 'lightblue' : 'lightgrey',
+        }}
+      >
+        <SceneCard
+          isDragging={snapshot.isDragging}
+          className="SceneCard"
+          appendNewScene={props.appendNewScene}
+          id={scene.id}
+          index={index}
+        />
+      </div>
     );
   };
 
   return (
-    <div className="SceneLevel" style={{ opacity: isDragging ? 0.5 : 1 }}>
-      <div className="SceneCards">
-        {mapIndex(generateSceneCard, props.scenes)}
-      </div>
-      <Button
-        className="DeleteButton"
-        variant="contained"
-        color="secondary"
-        size="small"
-        onClick={props.removeLevel}
-      >
-        Delete
-      </Button>
-    </div>
+    <Draggable draggableId={props.id} index={props.index}>
+      {(provided) => (
+        <div
+          className="SceneLevel"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          style={{
+            margin: '8px',
+            border: '1px solid lightgrey',
+            borderRadius: '2px',
+            ...provided.draggableProps.style,
+          }}
+        >
+          <div className="SceneCards">
+            <Droppable droppableId={props.id} type={DraggableTypes.SCENE_CARD}>
+              {(provided, snapshot) => {
+                return (
+                  <>
+                    {mapIndex(
+                      generateSceneCard(provided, snapshot),
+                      props.scenes
+                    )}
+                    {provided.placeholder}
+                  </>
+                );
+              }}
+            </Droppable>
+          </div>
+          <Button
+            className="DeleteButton"
+            variant="contained"
+            color="secondary"
+            size="small"
+            onClick={props.removeLevel}
+          >
+            Delete
+          </Button>
+        </div>
+      )}
+    </Draggable>
   );
 }
 

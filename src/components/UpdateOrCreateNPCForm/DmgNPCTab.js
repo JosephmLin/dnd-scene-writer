@@ -64,7 +64,7 @@ const DmgNPCTab = ({ npc, updateNPC }) => {
         label="Ideal"
         placeholder="Respect others, and treat each other fairly"
         helperText="What does this NPC believe in?"
-        value={npc.interaction}
+        value={npc.ideal}
         onChange={updateNPC('interaction')}
       />
       <TextField

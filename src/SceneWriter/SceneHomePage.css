@@ -2,13 +2,11 @@
   margin: auto;
 }
 
-.SceneHomePage-Parent {
+.SceneHomePage {
   background-color: #add8e6;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
-  width: 50%;
 }

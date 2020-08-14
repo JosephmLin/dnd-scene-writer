@@ -11,7 +11,7 @@ import {
   T,
 } from 'ramda';
 import { v4 as uuidv4 } from 'uuid';
-import { tags } from '../../action/sceneLevelsActions';
+import { tags } from '../../action/sceneLayoutActions';
 
 const generateAddNewSceneLevelState = (sceneId, index, sceneLevel, state) => {
   const addToExistingSceneLevel = adjust(
@@ -28,8 +28,8 @@ const generateAddNewSceneLevelState = (sceneId, index, sceneLevel, state) => {
 
   return applySpec({
     state: always(tags.ADD_SCENE_LEVEL_TAG),
-    sceneLevels: pipe(
-      prop('sceneLevels'),
+    sceneLayout: pipe(
+      prop('sceneLayout'),
       cond([
         [nth(sceneLevel), addToExistingSceneLevel],
         [T, createNewSceneLevel],
