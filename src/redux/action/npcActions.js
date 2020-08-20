@@ -1,20 +1,20 @@
-const UPDATE_OR_ADD_NPC = 'UPDATE_OR_ADD_NPC';
-const REMOVE_NPC = 'REMOVE_NPC';
+const UPDATE_NPC_LIST = 'UPDATE_NPC_LIST';
+// const CREATE_NEW_NPC = 'CREATE_NEW_NPC';
 
 export const tags = {
-  UPDATE_OR_ADD_NPC,
-  REMOVE_NPC,
+  UPDATE_NPC_LIST,
+  // CREATE_NEW_NPC,
 };
 
 /**
  * @see {@link https://github.com/redux-utilities/flux-standard-action}
  */
-const actionMaker = (tag) => (payload) => ({
+const apiActionMaker = (tag) => (payload) => ({
   payload,
   type: tag,
 });
 
 export const actions = {
-  UPDATE_OR_ADD_NPC: actionMaker(UPDATE_OR_ADD_NPC),
-  REMOVE_NPC: actionMaker(REMOVE_NPC),
+  UPDATE_NPC_LIST_ACTION: apiActionMaker(UPDATE_NPC_LIST),
+  // CREATE_NEW_NPC_ACTION: apiActionMaker(CREATE_NEW_NPC),
 };

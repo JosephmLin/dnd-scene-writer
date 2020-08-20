@@ -4,6 +4,7 @@ import { actions as sceneLayoutActions } from '../../redux/action/sceneLayoutAct
 import { actions as sceneActions } from '../../redux/action/scenesActions';
 import { getSceneLayout } from '../../redux/reducers/sceneLayoutReducer';
 import { connect } from 'react-redux';
+import fetchNpcs, { actionTypes } from '../../redux/action/npcsApi';
 
 export const storePropKey = 'sceneLevelsHOC';
 
@@ -28,6 +29,7 @@ export default function sceneSetsHOC(WrappedComponent) {
       dispatch(sceneActions.UPDATE_OR_ADD_SCENE_ACTION(sceneData)),
     removeSceneDispatch: (index) =>
       dispatch(sceneActions.REMOVE_SCENE_ACTION(index)),
+    fetchNpcs: () => dispatch(fetchNpcs(actionTypes.get)),
   });
 
   return connect(mapStateToProps, mapDispatchToProps)(WrappedComponent);

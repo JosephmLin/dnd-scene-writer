@@ -13,8 +13,8 @@ function App() {
       <Navbar />
       {/* left navigation bar will hold denote the various sessions in the campaign. Each session depicts a set of scenes, NPCs and characters */}
       <div className="MainPage">
-        <SceneHomePage />
-        {/* <UpdateOrCreateNPC /> */}
+        {/* <SceneHomePage /> */}
+        <UpdateOrCreateNPC />
         {/* <HOC /> */}
         {/* <SortablePage /> */}
         {/* <Sandbox /> */}

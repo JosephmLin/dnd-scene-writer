@@ -1,5 +1,5 @@
 import { pipe, objOf } from 'ramda';
-import { actions as npcActions } from '../../redux/action/npcActions';
+import { actionTypes, npcsApi } from '../../redux/action/npcsApi';
 import { getNPCs } from '../../redux/reducers/npcReducer';
 import { connect } from 'react-redux';
 
@@ -14,9 +14,10 @@ export default function npcStoreHOC(WrappedComponent) {
   const mapStateToProps = pipe(getNPCs, objOf(storePropKey));
 
   const mapDispatchToProps = (dispatch) => ({
-    updateOrAddNPC: (sceneData) =>
-      dispatch(npcActions.UPDATE_OR_ADD_NPC_ACTION(sceneData)),
-    // removeNPC: (index) => dispatch(npcActions.REMOVE_NPC_ACTION(index)),
+    updateOrAddNPC: (sceneData) => {
+      dispatch(npcsApi(actionTypes.create, sceneData));
+      dispatch(npcsApi(actionTypes.get, sceneData));
+    },
   });
 
   return connect(mapStateToProps, mapDispatchToProps)(WrappedComponent);

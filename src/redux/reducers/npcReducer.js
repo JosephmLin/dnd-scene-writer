@@ -1,16 +1,5 @@
 import { tags } from '../action/npcActions';
-import {
-  always,
-  applySpec,
-  dissoc,
-  cond,
-  pipe,
-  pathOr,
-  prop,
-  propEq,
-  T,
-  assoc,
-} from 'ramda';
+import { always, pathOr, propOr, propEq, when, has } from 'ramda';
 
 /**
  * @typedef
@@ -20,25 +9,17 @@ import {
  */
 const initialState = {
   state: undefined,
+  isFetching: false,
   npcs: {},
 };
 
-const generateUpdateOrAddNPC = (state, sceneData) =>
-  applySpec({
-    state: always(tags.UPDATE_OR_ADD_NPC),
-    npcs: pipe(prop('npcs'), assoc(sceneData.id, sceneData)),
-  })(state);
-
-const updateOrAddNPC = (state) => ({ payload }) =>
-  generateUpdateOrAddNPC(state, payload);
-
-const generateRemoveNPCState = (state, id) => ({
-  state: tags.REMOVE_NPC,
-  npcs: pipe(prop('npcs'), dissoc(id))(state),
-});
-
-const removeNPC = (state) => ({ payload: { id } }) =>
-  generateRemoveNPCState(state, id);
+const updateNpc = (state, { payload }) => {
+  return {
+    state: tags.UPDATE_OR_ADD_NPC,
+    isFetching: propOr(false, 'isFetching', payload),
+    npcs: when(has('isFetching'), always(state.npcs))(payload),
+  };
+};
 
 const typeEquals = propEq('type');
 
@@ -55,11 +36,13 @@ const typeEquals = propEq('type');
  * @param {updateOrAddNPCAction} action
  */
 const reducer = (state = initialState, action) => {
-  return cond([
-    [typeEquals(tags.UPDATE_OR_ADD_NPC), updateOrAddNPC(state)],
-    [typeEquals(tags.REMOVE_NPC), removeNPC(state)],
-    [T, always(state)],
-  ])(action);
+  if (typeEquals(tags.UPDATE_NPC_LIST, action)) {
+    return updateNpc(state, action);
+  }
+  // if (typeEquals(tags.CREATE_NEW_NPC, action)) {
+  //   return createNewNpc()
+  // }
+  return state;
 };
 
 /**

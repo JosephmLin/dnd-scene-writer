@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import DmgNPCTab from './DmgNPCTab';
 import npcStoreHOC, { storePropKey } from '../hoc/npcStoreHOC';
 import CommonTabs from '../CommonTabs';
+import './UpdateOrCreateNpc.css';
 
 const UpdateOrCreateSceneNPC = ({
   [storePropKey]: NPCS,
@@ -29,15 +30,22 @@ const UpdateOrCreateSceneNPC = ({
     'DMG NPC Guide': <DmgNPCTab npc={npc} updateNPC={updateNPC} />,
   };
   return (
-    <form onSubmit={saveNPC}>
+    <form className="npcForm" onSubmit={saveNPC}>
       <TextField
         id="NPCname"
         label="Name"
         required
         placeholder="John Doe"
         helperText="Name of the NPC"
-        value={npc.summary}
-        onChange={updateNPC('summary')}
+        value={npc.name}
+        onChange={updateNPC('name')}
+      />
+      <TextField
+        id="NPCDescription"
+        label="One Line Description"
+        placeholder="Large blacksmith, talkative and forward"
+        value={npc.description}
+        onChange={updateNPC('description')}
       />
       <CommonTabs tabLabels={tabLabels} tabComponents={tabComponents} />
       <Button type="submit">{id ? 'Update' : 'Save New'} NPC</Button>

@@ -2,7 +2,7 @@ import SceneLevel from './SceneLevel';
 import { Button } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
 import './SceneHomePage.css';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import sceneHomePageHOC, { storePropKey } from './hoc/sceneHomePageHOC';
 import { addIndex, map, pipe, nth, prop } from 'ramda';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -18,7 +18,11 @@ function SceneHomePage({
   changeLayoutDispatch,
   removeSceneDispatch,
   removeSceneLevelDispatch,
+  fetchNpcs,
 }) {
+  useEffect(() => {
+    fetchNpcs();
+  });
   const addSceneLevel = (sceneLevel) => () => {
     const newSceneId = `scene - ${uuidv4()}`;
     // This creates a relationship between scene level and scene

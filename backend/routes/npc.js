@@ -53,15 +53,16 @@ router.route('/logout').get(function (req, res, next) {
 
 // READ npcs
 router.route('/').get((req, res, next) => {
-  if (req.cookies.user_sid) {
-    npcSchema.find((error, data) => {
-      if (error) {
-        return next(error);
-      } else {
-        res.json(data);
-      }
-    });
-  }
+  // if (req.cookies.user_sid) {
+  npcSchema.find((error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+  // }
 });
 
 // Update npc
