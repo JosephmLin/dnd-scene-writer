@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import DmgNPCTab from './DmgNPCTab';
 import npcStoreHOC, { storePropKey } from '../hoc/npcStoreHOC';
 import CommonTabs from '../CommonTabs';
-import './UpdateOrCreateNpc.css';
+import './UpdateOrCreateNPC.css';
 
 const UpdateOrCreateSceneNPC = ({
   [storePropKey]: NPCS,

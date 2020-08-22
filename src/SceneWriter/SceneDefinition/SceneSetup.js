@@ -7,7 +7,7 @@ import { Checkbox } from '@material-ui/core';
 import './SceneSetup.css';
 import SceneDescription from './SceneDescription';
 import SceneCombat from './SceneCombat';
-import SceneNPCs from '../../components/NPCAutofillComponent';
+import SceneNPCs from '../../components/NPCTextarea';
 import SceneLocation from './SceneLocation';
 import CommonTabs from '../../components/CommonTabs';
 

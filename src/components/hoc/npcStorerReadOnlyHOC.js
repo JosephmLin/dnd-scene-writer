@@ -1,8 +1,9 @@
 import { pipe, objOf } from 'ramda';
 import { getNPCs } from '../../redux/reducers/npcReducer';
 import { connect } from 'react-redux';
+import { actionTypes, npcsApi } from '../../redux/action/npcsApi';
 
-export const storePropKey = 'npcHOC';
+export const storePropKey = 'npcHOCReadOnly';
 
 /**
  * @function npcHOC
@@ -11,5 +12,10 @@ export const storePropKey = 'npcHOC';
  */
 export default function npcStoreHOC(WrappedComponent) {
   const mapStateToProps = pipe(getNPCs, objOf(storePropKey));
-  return connect(mapStateToProps)(WrappedComponent);
+  const mapDispatchToProps = (dispatch) => ({
+    getNpcs: (sceneData) => {
+      dispatch(npcsApi(actionTypes.get, sceneData));
+    },
+  });
+  return connect(mapStateToProps, mapDispatchToProps)(WrappedComponent);
 }
