@@ -10,7 +10,7 @@ import { always, pathOr, propOr, propEq, when, has } from 'ramda';
 const initialState = {
   state: undefined,
   isFetching: false,
-  npcs: {},
+  npcs: [],
 };
 
 const updateNpc = (state, { payload }) => {

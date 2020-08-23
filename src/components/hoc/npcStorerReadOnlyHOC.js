@@ -13,8 +13,8 @@ export const storePropKey = 'npcHOCReadOnly';
 export default function npcStoreHOC(WrappedComponent) {
   const mapStateToProps = pipe(getNPCs, objOf(storePropKey));
   const mapDispatchToProps = (dispatch) => ({
-    getNpcs: (sceneData) => {
-      dispatch(npcsApi(actionTypes.get, sceneData));
+    getNpcs: () => {
+      dispatch(npcsApi(actionTypes.get));
     },
   });
   return connect(mapStateToProps, mapDispatchToProps)(WrappedComponent);

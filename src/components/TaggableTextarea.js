@@ -39,6 +39,7 @@ const TaggableTextarea = ({ whitelist, onAddTag, onRemoveTag, onOpenTag }) => {
     ...baseTagifySettings,
     callbacks: {
       add: (e) => {
+        console.log(e.detail);
         onAddTag ? onAddTag(e.detail.data) : console.log('onAddTag');
       },
       click: (e) => {
@@ -55,8 +56,6 @@ const TaggableTextarea = ({ whitelist, onAddTag, onRemoveTag, onOpenTag }) => {
     e.persist();
     setValue(e.target.value);
   }, []);
-  console.log('TAGIFY SETTINGS: ', tagifySettings);
-
   return (
     <Tags
       InputMode="textarea"

@@ -1,4 +1,14 @@
 .npcTextarea {
   border: 1px;
   min-width: 15em;
+  height: 100%;
+}
+
+.tagify {
+  margin-bottom: 3em;
+  --tag-bg: #6c0e42;
+  --tag-text-color: white;
+  --tag-text-color--edit: white;
+  --tag-hover: rgb(162, 8, 56);
+  --tag-remove-btn-color: white;
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, Button, Chip } from '@material-ui/core';
-import { applySpec, map, reject, replace, pipe, prop } from 'ramda';
+import { append, applySpec, map, reject, replace, pipe, prop } from 'ramda';
 import npcStoreReadOnlyHOC, { storePropKey } from './hoc/npcStorerReadOnlyHOC';
-import TaggableTextarea from '../tagify/TaggableTextarea';
+import TaggableTextarea from './TaggableTextarea';
 import './NPCTextarea.css';
 
 const NPCAutofillComponent = ({
@@ -12,20 +12,25 @@ const NPCAutofillComponent = ({
   getNpcs,
 }) => {
   const [npcsInTextarea, setNpcsInTextarea] = useState([]);
+
   useEffect(() => {
     getNpcs();
-  }, [getNpcs]);
+  }, [getNpcs, npcsInTextarea]);
+
   const createWhitelistObject = applySpec({
     value: pipe(prop('name'), replace(' ', '-')),
-    // title: prop('description'),
+    title: prop('description'),
+    id: prop('_id'),
   });
+  const whitelist = map(createWhitelistObject, NPC_STORE);
+
   const addNpc = (npc) => {
-    console.log(npc);
-    setNpcsInTextarea([...npcsInTextarea, npc]);
+    setNpcsInTextarea((oldNpcs) => {
+      return [...oldNpcs, npc];
+    });
   };
   const removeNpc = (npc) => {
-    console.log(npc);
-    setNpcsInTextarea(reject((ele) => ele === npc, npcsInTextarea));
+    setNpcsInTextarea((oldNpcs) => reject((ele) => ele.id === npc.id, oldNpcs));
   };
   const openNpc = (npc) => {
     // reroute
@@ -34,15 +39,15 @@ const NPCAutofillComponent = ({
 
   const generateNPCChips = (npc) => {
     return (
-      <Chip key={npc.id} label={npc.name} avatar={<Avatar src={npc.src} />} />
+      <Chip key={npc.id} label={npc.value} avatar={<Avatar src={npc.img} />} />
     );
   };
-  const whitelist = map(createWhitelistObject, NPC_STORE);
-  console.log(whitelist);
+
+  console.log(npcsInTextarea);
   return (
     <div className="npcTextarea">
       <TaggableTextarea
-        whitelist={whitelist ? whitelist : false}
+        whitelist={whitelist}
         onAddTag={addNpc}
         onRemoveTag={removeNpc}
         onOpenTag={openNpc}
