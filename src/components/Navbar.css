@@ -1,0 +1,17 @@
+.nav-link {
+  color: black;
+  text-decoration: none;
+}
+.menu {
+  order: 1;
+}
+
+.title {
+  order: 2;
+  flex: 6;
+}
+
+.login {
+  order: 3;
+  flex: 0 0 5em;
+}

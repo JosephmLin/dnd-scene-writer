@@ -1,6 +1,6 @@
 .npcTextarea {
   border: 1px;
-  min-width: 15em;
+  min-width: 20em;
   height: 100%;
 }
 
@@ -11,4 +11,11 @@
   --tag-text-color--edit: white;
   --tag-hover: rgb(162, 8, 56);
   --tag-remove-btn-color: white;
+  min-height: 15em;
+  width: 20em;
+  padding: 1em;
+}
+.tagify__input {
+  word-wrap: break-word;
+  padding: 0px;
 }
