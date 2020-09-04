@@ -1,4 +1,10 @@
 .npcForm {
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  padding-left: 2em;
+  padding-right: 2em;
+  align-content: space-around;
+  width: 100%;
 }

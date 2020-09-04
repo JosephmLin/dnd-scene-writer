@@ -1,6 +1,6 @@
 import React from 'react';
 import UpdateOrCreateNPC from './components/UpdateOrCreateNPCForm/UpdateOrCreateNPC';
-import NPCTextarea from './components/NPCTextarea';
+import NPCTextarea from './components/NpcTextarea/NPCTextarea';
 import SceneHomePage from './SceneWriter/SceneHomePage';
 
 const routes = {

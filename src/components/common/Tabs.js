@@ -8,29 +8,30 @@ import { map } from 'ramda';
  * @param {Array.<String>} tabLabels order matters based on tab order
  * @param {Object} tabComponents key is the tab Label
  */
-const CommonTabs = ({ tabLabels, tabComponents }) => {
-  const [currentTab, changeTab] = useState(0);
-
+const CommonTabs = ({ tabComponents }) => {
+  const [currentTab, changeTab] = useState(false);
   const handleChange = (event, value) => {
     changeTab(value);
   };
 
-  const generateTab = (label) => {
-    return <Tab label={label} key={label} />;
+  const generateTab = (config) => {
+    return (
+      <Tab disabled={config.disabled} label={config.label} key={config.label} />
+    );
   };
 
-  const generateComponent = () => {
-    return tabComponents[tabLabels[currentTab]];
-  };
+  const generateComponent = currentTab
+    ? tabComponents[currentTab].component
+    : null;
 
   return (
     <>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color="default">
         <Tabs value={currentTab} onChange={handleChange} variant="fullWidth">
-          {map(generateTab, tabLabels)}
+          {map(generateTab, tabComponents)}
         </Tabs>
       </AppBar>
-      {generateComponent()}
+      {generateComponent}
     </>
   );
 };

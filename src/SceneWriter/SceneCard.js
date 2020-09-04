@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { pipe, path } from 'ramda';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
-import SaveDialog from '../components/SaveDialog';
+import Dialog from '../components/common/Dialog';
 import SceneSetup from './SceneDefinition/SceneSetup';
 import ClearIcon from '@material-ui/icons/Clear';
 import sceneCardHOC, { storePropKey } from './hoc/sceneCardHOC';
@@ -74,14 +74,9 @@ function SceneCard({
               <ClearIcon className="SceneDelete" onClick={removeObject} />
               <AddIcon className="AddScene" onClick={appendNewScene} />
             </span>
-            <SaveDialog
-              // title="Set up a Scene!"
-              // close={closeDialog}
-              // save={saveAndClose}
-              open={open}
-            >
+            <Dialog open={open}>
               <SceneSetup save={saveAndClose} close={closeDialog} />
-            </SaveDialog>
+            </Dialog>
           </CardContent>
         </Card>
       )}

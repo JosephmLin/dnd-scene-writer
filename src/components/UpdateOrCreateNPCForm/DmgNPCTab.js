@@ -1,7 +1,9 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
+import { __, pathOr } from 'ramda';
 
 const DmgNPCTab = ({ npc, updateNPC }) => {
+  const getNPCValue = pathOr('', __, npc);
   return (
     <>
       <TextField
@@ -10,8 +12,8 @@ const DmgNPCTab = ({ npc, updateNPC }) => {
         label="Occupation"
         placeholder="Former blacksmith, current innkeeper"
         helperText="What does this NPC do?"
-        value={npc.occupation}
-        onChange={updateNPC('occupation')}
+        value={getNPCValue(['dmg', 'occupation'])}
+        onChange={updateNPC(['dmg', 'occupation'])}
       />
       <TextField
         id="appearance"
@@ -19,8 +21,8 @@ const DmgNPCTab = ({ npc, updateNPC }) => {
         label="Appearance"
         placeholder="Blacksmith burn marks on his arms"
         helperText="What does this NPC look like?"
-        value={npc.appearance}
-        onChange={updateNPC('appearance')}
+        value={getNPCValue(['dmg', 'appearance'])}
+        onChange={updateNPC(['dmg', 'appearance'])}
       />
       <TextField
         id="Abilities"
@@ -28,8 +30,8 @@ const DmgNPCTab = ({ npc, updateNPC }) => {
         label="Abilities"
         placeholder="Brawny (High Strength), but absentminded (Low Wisdom)"
         helperText="What are this NPC's notable strengths and weaknesses?"
-        value={npc.abilities}
-        onChange={updateNPC('abilities')}
+        value={getNPCValue(['dmg', 'abilities'])}
+        onChange={updateNPC(['dmg', 'abilities'])}
       />
       <TextField
         id="Talent"
@@ -37,8 +39,8 @@ const DmgNPCTab = ({ npc, updateNPC }) => {
         label="Talent"
         placeholder="Especially good at drinking"
         helperText="What is something this NPC does that is unique?"
-        value={npc.talent}
-        onChange={updateNPC('talent')}
+        value={getNPCValue(['dmg', 'talent'])}
+        onChange={updateNPC(['dmg', 'talent'])}
       />
       <TextField
         id="Mannerism"
@@ -46,8 +48,8 @@ const DmgNPCTab = ({ npc, updateNPC }) => {
         label="Mannerism"
         placeholder="Tends to over explain"
         helperText="What is this NPC's behavior?"
-        value={npc.mannerism}
-        onChange={updateNPC('mannerism')}
+        value={getNPCValue(['dmg', 'mannerism'])}
+        onChange={updateNPC(['dmg', 'mannerism'])}
       />
       <TextField
         id="Interaction"
@@ -55,8 +57,8 @@ const DmgNPCTab = ({ npc, updateNPC }) => {
         label="Interaction"
         placeholder="Very Friendly, but somewhat tactless"
         helperText="How does this NPC treat others?"
-        value={npc.interaction}
-        onChange={updateNPC('interaction')}
+        value={getNPCValue(['dmg', 'interaction'])}
+        onChange={updateNPC(['dmg', 'interaction'])}
       />
       <TextField
         id="Ideal"
@@ -64,8 +66,8 @@ const DmgNPCTab = ({ npc, updateNPC }) => {
         label="Ideal"
         placeholder="Respect others, and treat each other fairly"
         helperText="What does this NPC believe in?"
-        value={npc.ideal}
-        onChange={updateNPC('ideal')}
+        value={getNPCValue(['dmg', 'ideal'])}
+        onChange={updateNPC(['dmg', 'ideal'])}
       />
       <TextField
         id="Bond"
@@ -73,8 +75,8 @@ const DmgNPCTab = ({ npc, updateNPC }) => {
         label="Bond"
         placeholder="Protective of his best swords"
         helperText="What location, person, or thing is important to the NPC?"
-        value={npc.bond}
-        onChange={updateNPC('bond')}
+        value={getNPCValue(['dmg', 'bond'])}
+        onChange={updateNPC(['dmg', 'bond'])}
       />
       <TextField
         id="Flaw"
@@ -82,8 +84,8 @@ const DmgNPCTab = ({ npc, updateNPC }) => {
         label="Flaw Or Secret"
         placeholder="Has a mistress, a waitress, unbeknown to the rest of his family"
         helperText="What element of this NPC's personality or history can undermine this character? Or a secret they try to hide?"
-        value={npc.flaw}
-        onChange={updateNPC('flaw')}
+        value={getNPCValue(['dmg', 'flaw'])}
+        onChange={updateNPC(['dmg', 'flaw'])}
       />
     </>
   );

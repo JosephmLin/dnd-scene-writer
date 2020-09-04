@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, Button, Chip } from '@material-ui/core';
 import { append, applySpec, map, reject, replace, pipe, prop } from 'ramda';
-import npcStoreReadOnlyHOC, { storePropKey } from './hoc/npcStorerReadOnlyHOC';
+import npcStoreReadOnlyHOC, { storePropKey } from '../hoc/npcStorerReadOnlyHOC';
 import TaggableTextarea from './TaggableTextarea';
 import './NPCTextarea.css';
 

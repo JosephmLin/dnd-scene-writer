@@ -9,7 +9,7 @@ import {
   Menu,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import routes from '../routeConstants';
+import routes from '../../routeConstants';
 import { path, pipe, mapObjIndexed, values } from 'ramda';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
@@ -29,14 +29,12 @@ const Navbar = (props) => {
 
   const open = Boolean(anchorEl);
 
-  const generateNavbarLinks = (routeConfig, route) => {
-    console.log(route);
-    return (
-      <Link className="nav-link" key={route} to={route}>
-        <MenuItem onClick={handleClose}>{routeConfig.title}</MenuItem>
-      </Link>
-    );
-  };
+  const generateNavbarLinks = (routeConfig, route) => (
+    <Link className="nav-link" key={route} to={route}>
+      <MenuItem onClick={handleClose}>{routeConfig.title}</MenuItem>
+    </Link>
+  );
+
   return (
     <AppBar position="static">
       <Toolbar disableGutters={true}>

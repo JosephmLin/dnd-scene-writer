@@ -7,9 +7,9 @@ import { Checkbox } from '@material-ui/core';
 import './SceneSetup.css';
 import SceneDescription from './SceneDescription';
 import SceneCombat from './SceneCombat';
-import SceneNPCs from '../../components/NPCTextarea';
+import SceneNPCs from '../../components/NpcTextarea/NPCTextarea';
 import SceneLocation from './SceneLocation';
-import CommonTabs from '../../components/CommonTabs';
+import CommonTabs from '../../components/common/Tabs';
 
 const editField = (setField) => pipe(path(['target', 'value']), setField);
 const handleCheck = (setField) => pipe(path(['target', 'checked']), setField);

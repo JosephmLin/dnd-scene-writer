@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import routes from './routeConstants';
 import { pipe, values, mapObjIndexed } from 'ramda';
 
-const generateRoute = (routeConfig, key) => {
+const generateRoute = (routeConfig, route) => {
   return (
-    <Route exact path={key}>
+    <Route exact key={route} path={route}>
       <div className="content">{routeConfig.component()}</div>
     </Route>
   );
