@@ -1,15 +1,15 @@
 import { pipe, objOf } from 'ramda';
 
-import { actions as sceneLayoutActions } from '../../redux/action/sceneLayoutActions';
-import { actions as sceneActions } from '../../redux/action/scenesActions';
-import { getSceneLayout } from '../../redux/reducers/sceneLayoutReducer';
+import { actions as sceneLayoutActions } from '../../../redux/action/sceneLayoutActions';
+import { actions as sceneActions } from '../../../redux/action/scenesActions';
+import { getSceneLayout } from '../../../redux/reducers/sceneLayoutReducer';
 import { connect } from 'react-redux';
-import fetchNpcs, { actionTypes } from '../../redux/action/npcsApi';
+import fetchNpcs, { actionTypes } from '../../../redux/action/npcsApi';
 
 export const storePropKey = 'sceneLevelsHOC';
 
 /**
- * @function sceneLevelssHOC
+ * @function sceneSetsHOC
  * @description A functional higher order component that
  * @param {*} WrappedComponent connects this component to the store, specifically
  */

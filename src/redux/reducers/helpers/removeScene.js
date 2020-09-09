@@ -7,6 +7,7 @@ import {
   evolve,
   reject,
   equals,
+  isEmpty,
 } from 'ramda';
 import { tags } from '../../action/sceneLayoutActions';
 
@@ -19,7 +20,8 @@ const removeScene = (state) => ({ payload: { id } }) =>
         evolve({
           scenes: reject(equals(id)),
         })
-      )
+      ),
+      reject(pipe(prop('scenes'), isEmpty))
     ),
   })(state);
 

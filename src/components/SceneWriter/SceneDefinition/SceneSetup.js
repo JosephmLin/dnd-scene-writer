@@ -7,9 +7,9 @@ import { Checkbox } from '@material-ui/core';
 import './SceneSetup.css';
 import SceneDescription from './SceneDescription';
 import SceneCombat from './SceneCombat';
-import SceneNPCs from '../../components/NpcTextarea/NPCTextarea';
+import SceneNPCs from '../../NPCTextarea/NPCTextarea';
 import SceneLocation from './SceneLocation';
-import CommonTabs from '../../components/common/Tabs';
+import CommonTabs from '../../common/Tabs';
 
 const editField = (setField) => pipe(path(['target', 'value']), setField);
 const handleCheck = (setField) => pipe(path(['target', 'checked']), setField);
@@ -52,25 +52,41 @@ export default function SceneSetup({ name, save }) {
     save(buildScene());
   };
 
-  const tabLabels = ['Description', 'Combat', 'NPCs', 'Locations'];
-  const tabComponents = {
-    Description: (
-      <SceneDescription
-        description={description}
-        onDescriptionChange={setDescription}
-      />
-    ),
-    Combat: <SceneCombat combat={combat} onCombatChange={setCombat} />,
-    NPCs: <SceneNPCs npcs={npcs} onNPCChange={setNPCs} />,
-    Locations: (
-      <SceneLocation location={location} onLocationChange={setLocation} />
-    ),
-  };
+  const tabComponents = [
+    {
+      label: 'Description',
+      disabled: false,
+      component: (
+        <SceneDescription
+          description={description}
+          onDescriptionChange={setDescription}
+        />
+      ),
+    },
+    {
+      label: 'Combat',
+      disabled: !hasCombat,
+      component: <SceneCombat combat={combat} onCombatChange={setCombat} />,
+    },
+    {
+      label: 'NPCs',
+      disabled: false,
+      component: <SceneNPCs npcs={npcs} onNPCChange={setNPCs} />,
+    },
+    {
+      label: 'Locations',
+      disabled: false,
+      component: (
+        <SceneLocation location={location} onLocationChange={setLocation} />
+      ),
+    },
+  ];
   return (
     <React.Fragment>
       <TextField
         className="SceneName"
         label="Name"
+        fullWidth
         placeholder="Act 1: A morose meeting at the inn"
         value={sceneName}
         onChange={editField(setSceneName)}
@@ -86,6 +102,7 @@ export default function SceneSetup({ name, save }) {
           onChange={editField(setAbstract)}
         />
         <FormControlLabel
+          id="end"
           value="end"
           checked={hasCombat}
           onChange={handleCheck(setHasCombat)}
@@ -93,7 +110,7 @@ export default function SceneSetup({ name, save }) {
           label="Combat"
           labelPlacement="end"
         />
-        <CommonTabs tabLabels={tabLabels} tabComponents={tabComponents} />
+        <CommonTabs tabComponents={tabComponents} />
         <Button type="submit"> Save Scene </Button>
       </form>
     </React.Fragment>

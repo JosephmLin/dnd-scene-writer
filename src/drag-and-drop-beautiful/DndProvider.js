@@ -61,12 +61,6 @@ class DndProvider extends React.Component {
           return <Column key={column.id} column={column} tasks={columnTasks} />;
         })}
       </DragDropContext>
-      // <DragDropContext onDragEnd={this.onDragEnd}>
-      //   <AlternateColumn
-      //     column={this.state.columns.column1}
-      //     tasks={this.testTasks}
-      //   />
-      // </DragDropContext>
     );
   }
 }

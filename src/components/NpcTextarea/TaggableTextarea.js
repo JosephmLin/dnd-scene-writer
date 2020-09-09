@@ -1,12 +1,17 @@
 import Tags from '@yaireo/tagify/dist/react.tagify';
 import '@yaireo/tagify/dist/tagify.css';
 import React, { useState, useCallback } from 'react';
+import { Typography } from '@material-ui/core';
 
 /**
  * Events I need to trigger:
  *  1. When new tag is created ( to add to an existing list of tags for this text area ), which is returned in a callback
  *  2. When an existing tag is clicked, retrieve the value object and return in a callback
  * 	3. Consider adjusting the template for each tag to display a small icon, using this example: https://yaireo.github.io/tagify/#section-extra-properties
+ *
+ *
+ * I REALLY don't like tagify's CSS on the textarea. To write my own would be a rather large undertaking. Instead, I'm just going to put a note next to each of
+ * these textareas denoting these are taggable text areas.
  *
  *
  */
@@ -57,13 +62,18 @@ const TaggableTextarea = ({ whitelist, onAddTag, onRemoveTag, onOpenTag }) => {
     setValue(e.target.value);
   }, []);
   return (
-    <Tags
-      InputMode="textarea"
-      settings={tagifySettings}
-      whitelist={whitelist}
-      onChange={onChange}
-      value={''}
-    />
+    <>
+      <Typography variant="caption" gutterBottom>
+        This textarea can tag other NPCs using "@"
+      </Typography>
+      <Tags
+        InputMode="textarea"
+        settings={tagifySettings}
+        whitelist={whitelist}
+        onChange={onChange}
+        value={''}
+      />
+    </>
   );
 };
 

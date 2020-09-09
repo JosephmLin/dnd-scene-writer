@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { pipe, path } from 'ramda';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
-import Dialog from '../components/common/Dialog';
+import Dialog from '../common/Dialog';
 import SceneSetup from './SceneDefinition/SceneSetup';
 import ClearIcon from '@material-ui/icons/Clear';
 import sceneCardHOC, { storePropKey } from './hoc/sceneCardHOC';
@@ -53,7 +53,7 @@ function SceneCard({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           style={{
-            margin: '1em',
+            margin: '0.5em',
             border: '1px solid lightgrey',
             borderRadius: '2px',
             ...provided.draggableProps.style,

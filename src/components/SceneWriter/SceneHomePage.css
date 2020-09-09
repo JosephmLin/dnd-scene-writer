@@ -10,3 +10,17 @@
   justify-content: center;
   color: white;
 }
+
+.SceneLevelContainer {
+  margin-bottom: '8px';
+  background-color: white;
+  width: 'max-content';
+  border: '1px solid lightgrey';
+  border-radius: '2px';
+}
+
+.DroppableContainer {
+  margin: '8px';
+  border-radius: '2px';
+  height: '100%';
+}

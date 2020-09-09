@@ -20,9 +20,8 @@ const CommonTabs = ({ tabComponents }) => {
     );
   };
 
-  const generateComponent = currentTab
-    ? tabComponents[currentTab].component
-    : null;
+  const generateComponent =
+    currentTab !== false ? tabComponents[currentTab].component : null;
 
   return (
     <>

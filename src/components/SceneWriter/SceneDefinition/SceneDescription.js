@@ -9,7 +9,6 @@ const SceneDescription = ({ onDescriptionChange, description }) => {
     });
   };
 
-  // TODO: Add Images, add NPC chips, add NPC/enemy tagging
   return (
     <>
       <TextField

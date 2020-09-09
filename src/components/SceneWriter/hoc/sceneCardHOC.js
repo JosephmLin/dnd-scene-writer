@@ -1,6 +1,6 @@
 import { pipe, objOf } from 'ramda';
-import { actions as sceneActions } from '../../redux/action/scenesActions';
-import { getScene } from '../../redux/reducers/scenesReducer';
+import { actions as sceneActions } from '../../../redux/action/scenesActions';
+import { getScene } from '../../../redux/reducers/scenesReducer';
 import { connect } from 'react-redux';
 
 export const storePropKey = 'sceneHOC';

@@ -4,7 +4,7 @@ import SceneCard from './SceneCard';
 import { Button } from '@material-ui/core';
 import './SceneLevel.css';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
-import DraggableTypes from '../constants/DraggableTypes';
+import DraggableTypes from '../../constants/DraggableTypes';
 
 const mapIndex = addIndex(map);
 /**
@@ -13,10 +13,10 @@ const mapIndex = addIndex(map);
  *
  */
 function SceneLevel(props) {
-  const generateSceneCard = (provided, snapshot) => (scene, index) => {
+  const generateSceneCard = (provided, snapshot) => (sceneId, index) => {
     return (
       <div
-        key={scene.id}
+        key={sceneId}
         ref={provided.innerRef}
         style={{
           margin: '8px',
@@ -27,7 +27,7 @@ function SceneLevel(props) {
           isDragging={snapshot.isDragging}
           className="SceneCard"
           appendNewScene={props.appendNewScene}
-          id={scene.id}
+          id={sceneId}
           index={index}
         />
       </div>
@@ -43,9 +43,6 @@ function SceneLevel(props) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           style={{
-            margin: '8px',
-            border: '1px solid lightgrey',
-            borderRadius: '2px',
             ...provided.draggableProps.style,
           }}
         >

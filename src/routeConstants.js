@@ -1,7 +1,8 @@
 import React from 'react';
 import UpdateOrCreateNPC from './components/UpdateOrCreateNPCForm/UpdateOrCreateNPC';
-import NPCTextarea from './components/NpcTextarea/NPCTextarea';
-import SceneHomePage from './SceneWriter/SceneHomePage';
+import NPCTextarea from './components/NPCTextarea/NPCTextarea';
+import DndProvider from './drag-and-drop-beautiful/DndProvider';
+import SceneHomePage from './components/SceneWriter/SceneHomePage';
 
 const routes = {
   '/': {
@@ -15,6 +16,10 @@ const routes = {
   '/sandbox': {
     component: (props) => <NPCTextarea {...props} />,
     title: 'Sandbox',
+  },
+  '/dnd': {
+    component: (props) => <DndProvider {...props} />,
+    title: 'Drag and Drop',
   },
 };
 

@@ -6,7 +6,7 @@ import React, { useCallback, useEffect } from 'react';
 import sceneHomePageHOC, { storePropKey } from './hoc/sceneHomePageHOC';
 import { addIndex, map, pipe, nth, prop } from 'ramda';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import DraggableTypes from '../constants/DraggableTypes';
+import DraggableTypes from '../../constants/DraggableTypes';
 
 const mapIndex = addIndex(map);
 
@@ -22,14 +22,14 @@ function SceneHomePage({
 }) {
   useEffect(() => {
     fetchNpcs();
-  });
-  const addSceneLevel = (sceneLevel) => () => {
+  }, []);
+  const addSceneLevel = (sceneLevelIndex) => () => {
     const newSceneId = `scene - ${uuidv4()}`;
     // This creates a relationship between scene level and scene
     addSceneLevelDispatch({
       sceneId: newSceneId,
       index: 0,
-      sceneLevel,
+      sceneLevelIndex,
     });
 
     // Base definition of a scene
@@ -48,14 +48,13 @@ function SceneHomePage({
     };
   };
 
-  const addScene = (sceneLevel) => () => {
-    console.log('ADD SCENE');
+  const addScene = (sceneLevelIndex) => () => {
     const newSceneId = `scene - ${uuidv4()}`;
     // This creates a relationship between scene level and scene
     addSceneLevelDispatch({
       sceneId: newSceneId,
       index: -1,
-      sceneLevel,
+      sceneLevelIndex,
     });
 
     // Base definition of a scene
@@ -66,7 +65,7 @@ function SceneHomePage({
 
   const generateSceneLevels = (provided, snapshot) => (
     scenesOnLevel,
-    sceneLevel
+    sceneLevelIndex
   ) => {
     return (
       <div
@@ -75,19 +74,19 @@ function SceneHomePage({
         style={{
           border: '1px solid lightgrey',
           borderRadius: '2px',
-          padding: '10%',
           marginBottom: '8px',
           backgroundColor: 'white',
+          width: 'max-content',
         }}
         key={scenesOnLevel.id}
       >
         <SceneLevel
-          index={sceneLevel}
+          index={sceneLevelIndex}
           id={scenesOnLevel.id}
           scenes={scenesOnLevel.scenes}
           isDragging={snapshot.isDragging}
-          removeLevel={removeSceneLevel(sceneLevel)}
-          appendNewScene={addScene(sceneLevel)}
+          removeLevel={removeSceneLevel(sceneLevelIndex)}
+          appendNewScene={addScene(sceneLevelIndex)}
         />
       </div>
     );
@@ -114,14 +113,7 @@ function SceneHomePage({
         Add New Scene Level
       </Button>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div
-          style={{
-            margin: '8px',
-            border: '1px solid lightgrey',
-            borderRadius: '2px',
-            height: '100%',
-          }}
-        >
+        <div className="DroppableContainer">
           <Droppable
             droppableId="scene-levels"
             type={DraggableTypes.SCENE_LEVEL}

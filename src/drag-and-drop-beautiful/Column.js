@@ -31,13 +31,11 @@ const Column = (props) => {
                   ? 'lightblue'
                   : 'lightgrey',
               }}
-              // {...provided.droppableProps}
             >
-              {/* can be monkeypatched */}
               {props.tasks.map((task, index) => (
                 <Task key={task.id} task={task} index={index} />
               ))}
-              {/* {provided.placeholder} */}
+              {provided.placeholder}
             </div>
           );
         }}

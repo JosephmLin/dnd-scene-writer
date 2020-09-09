@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### DND Story Writer
 
-This is a simple application for displaying story board elements for DND.
+This is a simple application for displaying story board elements for RPG Elements, with a focus in DND.
 
 Each set of scenes makes one adventure.
 
@@ -18,21 +18,22 @@ Add custom tag section with color picker
 
 ### TODO
 
-Add router for creating and updating new NPCs
+Add router for creating and updating new NPCs: 75%
 Add image loading component
-Reorganize repository
-Clean up visuals
-Create Python backend for CRUD
-Research CSS libraries
+Clean up drag and drop
+
+Research CSS libraries. Utilize withStyles HOC in material ui
 
 ### Pages
 
-Scene Home Page
-It follows the following hierarchy:
-A Scene Set contains multiple Scene Levels
-A scene level can contain multiple scenes
+Episode Home Page
+One episode contains multiple Acts
+One Act can contain multiple scenes
 
-Scenes can have relationships between different scene levels
+NPC Creator
+These will contain a general character blueprints and details regarding an NPCs description.
+This will optionally contain a basic stat block (Modifiers, AC, HP, feats, spellcasting, attacks)
+This will optionally contain a character's
 
 ### `npm start`
 

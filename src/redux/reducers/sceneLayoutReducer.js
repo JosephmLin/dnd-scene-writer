@@ -33,9 +33,9 @@ const reducer = (state = initialState, action) => {
   return cond([
     [
       typeEquals(tags.ADD_NEW_SCENE_OR_SCENE_LEVEL_TAG),
-      helpers.addSceneLevel(state),
+      helpers.addSceneOrSceneLevel(state),
     ],
-    [typeEquals(tags.CHANGE_SCENE_LAYOUT), helpers.changeLayout(state)],
+    [typeEquals(tags.CHANGE_SCENE_LAYOUT_TAG), helpers.changeLayout(state)],
     [typeEquals(tags.REMOVE_SCENE_LEVEL_TAG), helpers.removeSceneLevel(state)],
     [typeEquals(tags.REMOVE_SCENE_TAG), helpers.removeScene(state)],
     [T, always(state)],
